@@ -1,0 +1,10 @@
+export 'initial_bindings.dart';
+export 'chats_binding.dart';
+export 'my_orders_binding.dart';
+export 'my_profile_binding.dart';
+export 'scaffold_navbar_binding.dart';
+export 'add_new_order_binding.dart';
+export 'order_details_binding.dart';
+export 'login_binding.dart';
+export 'signup_binding.dart';
+export 'add_my_products_binding.dart';

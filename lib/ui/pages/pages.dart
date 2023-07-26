@@ -1,0 +1,16 @@
+export 'splash/splash_page.dart';
+export 'login/login_page.dart';
+export 'sign_up/sing_up_page.dart';
+export 'forgot_password/forgot_password_page.dart';
+export 'chats/chats_page.dart';
+export 'my_orders/my_orders_page.dart';
+export 'my_profile/my_profile_page.dart';
+export 'scaffold_with_navbar/scaffold_with_navbar_page.dart';
+export 'add_new_order/add_new_order_page.dart';
+export 'contacts/contacts_page.dart';
+export 'order_details/order_details_page.dart';
+export 'create_order_product/create_order_product_page.dart';
+export 'add_multi_product/add_multi_product_page.dart';
+export 'invoices/invoices_page.dart';
+export 'my_products/my_products_page.dart';
+export 'add_update_my_product/add_update_my_product_page.dart';

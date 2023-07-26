@@ -1,0 +1,21 @@
+{
+    "name": "COMMERCIAL INVOICE",
+    "number": "215999cf-07ce-4794-86b7-58c82ec6b0ba",
+    "date": "2023-07-21T22:30:41.658Z",
+    "deliveryTerm": "EX WORKS",
+    "paymentTerm": "By Bank",
+    "id": 14,
+    "bundle": {
+        "id": 40,
+        "userId": 2,
+        "name": "order 3",
+        "image": "image",
+        "createdAt": "2023-07-21T21:39:48.000Z",
+        "updatedAt": "2023-07-21T21:39:48.000Z",
+        "orderProducts": []
+    },
+    "total": 0,
+    "userId": 2,
+    "updatedAt": "2023-07-21T22:30:41.658Z",
+    "createdAt": "2023-07-21T22:30:41.658Z"
+}

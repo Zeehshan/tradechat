@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../configs/apis/apis.dart';
+import '../../configs/routes/assets_path.dart';
 import '../../utils/utils.dart';
 import 'widgets.dart';
 
@@ -97,21 +98,24 @@ class NetworkImageWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: const Color(0xffCDD8E0),
                       borderRadius: BorderRadius.circular(borderRadius ?? 12)),
-                  child: Center(
-                    child: firstLaller != null
-                        ? Text(
-                            firstLaller!.toUpperCase(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline2!
-                                .copyWith(
-                                    fontSize: 16, fontWeight: FontWeight.w600),
-                          )
-                        : const FaIcon(
-                            FontAwesomeIcons.image,
-                            color: Colors.blueGrey,
-                          ),
-                  ),
+                  child: firstLaller != null
+                      ? Text(
+                          firstLaller!.toUpperCase(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline2!
+                              .copyWith(
+                                  fontSize: 16, fontWeight: FontWeight.w600),
+                        )
+                      : userId != null
+                          ? Image.asset(
+                              AssetsPath.profileImage,
+                              fit: boxFit,
+                            )
+                          : const FaIcon(
+                              FontAwesomeIcons.image,
+                              color: Colors.blueGrey,
+                            ),
                 ),
               ),
       ),

@@ -18,13 +18,12 @@ class InvoiceListWidget extends GetView<MyInvoicesController> {
           itemBuilder: (context, index) {
             final item = controller.invoices[index];
             String date = '';
-            final DateTime messageData = DateTime.parse(item.date);
+            final DateTime messageData = DateTime.parse(item.createdAt);
 
             date =
                 '${DateFormat.yMMMd().format(messageData)} ${DateFormat.jm().format(messageData)}';
             return Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
+              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
@@ -35,61 +34,70 @@ class InvoiceListWidget extends GetView<MyInvoicesController> {
                         color: Colors.grey.withOpacity(.2),
                         offset: const Offset(0, 0))
                   ]),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text.rich(TextSpan(
-                            text: 'Invoice #:',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .copyWith(fontSize: 12),
-                            children: [
-                              TextSpan(
-                                  text: item.id.toString(),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleLarge!
-                                      .copyWith(fontSize: 16))
-                            ])),
-                        const SizedBox(
-                          height: 6,
-                        ),
-                        Text.rich(TextSpan(
-                            text: 'Amount:',
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelMedium!
-                                .copyWith(fontSize: 12),
-                            children: [
-                              TextSpan(
-                                  text: item.total,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleLarge!
-                                      .copyWith(fontSize: 12))
-                            ])),
-                        const SizedBox(
-                          height: 6,
-                        ),
-                        Text(
-                          date,
-                          style: Theme.of(context).textTheme.labelMedium,
-                        ),
-                      ],
+              child: TextButton(
+                style: TextButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    )),
+                onPressed: () => controller.selectedInvoiceCalled(item),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text.rich(TextSpan(
+                              text: 'Invoice #:',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .copyWith(fontSize: 12),
+                              children: [
+                                TextSpan(
+                                    text: item.number.toString(),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleLarge!
+                                        .copyWith(fontSize: 12))
+                              ])),
+                          const SizedBox(
+                            height: 6,
+                          ),
+                          Text.rich(TextSpan(
+                              text: 'Amount:',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium!
+                                  .copyWith(fontSize: 12),
+                              children: [
+                                TextSpan(
+                                    text: item.total,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleLarge!
+                                        .copyWith(fontSize: 12))
+                              ])),
+                          const SizedBox(
+                            height: 6,
+                          ),
+                          Text(
+                            date,
+                            style: Theme.of(context).textTheme.labelMedium,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  DropDownWidget(
-                    onDelete: () {
-                      Future.value()
-                          .then((value) => controller.delete(item.id));
-                    },
-                    onEdit: () {},
-                  ),
-                ],
+                    DropDownWidget(
+                      onDelete: () {
+                        Future.value()
+                            .then((value) => controller.delete(item.id));
+                      },
+                      onEdit: () {},
+                    ),
+                  ],
+                ),
               ),
             );
           },

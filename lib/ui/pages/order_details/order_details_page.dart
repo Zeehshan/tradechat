@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tradechat/configs/routes/app_routes.dart';
-import 'package:tradechat/ui/widgets/widgets.dart';
 
+import '../../../configs/routes/app_routes.dart';
 import '../../../controllers/controllers.dart';
+import '../../../models/models.dart';
+import '../../widgets/widgets.dart';
 import 'widgets/widgets.dart';
 
 class OrderDetailsPage extends GetView<OrderDetailsController> {
@@ -37,7 +38,14 @@ class OrderDetailsPage extends GetView<OrderDetailsController> {
                           .titleLarge!
                           .copyWith(color: Colors.white, fontSize: 16),
                     ),
-                    onPressed: () => Get.toNamed(AppRoutes.createOrderProduct),
+                    onPressed: () async {
+                      final MyProductDataModel data =
+                          await Get.toNamed(AppRoutes.addUpdateMyProduct);
+                      final products = [
+                        {'productId': data.id, 'quantity': data.quantity},
+                      ];
+                      controller.updateProducts(products);
+                    },
                   )),
           ),
           SliverToBoxAdapter(
@@ -68,9 +76,7 @@ class OrderDetailsPage extends GetView<OrderDetailsController> {
               ),
               onPressed: () {
                 try {
-                  Get.toNamed(AppRoutes.invoices);
-                  // Get.toNamed(AppRoutes.addMultiProduct);
-                  print('vsall');
+                  controller.createInvoice();
                 } catch (e) {
                   //
                 }
@@ -114,7 +120,7 @@ class OrderDetailsPage extends GetView<OrderDetailsController> {
               ),
             ),
           ),
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: ProductListWidget(),
           )
         ],

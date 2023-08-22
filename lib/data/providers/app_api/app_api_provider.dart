@@ -1,7 +1,7 @@
 import '../../../models/models.dart';
 
 abstract class AppApiProvider {
-  Future addProduct(
+  Future<MyProductDataModel> addProduct(
       {required String title,
       required String link,
       required String qty,
@@ -9,7 +9,7 @@ abstract class AppApiProvider {
       required String description,
       required List<String> imgs});
 
-  Future<MyProductModel?> myProducts();
+  Future<MyProductModel?> myProducts({int currentPage = 1});
 
   Future<void> deleteProduct({required int id});
 
@@ -25,6 +25,13 @@ abstract class AppApiProvider {
   Future<OrderModel?> createOrder(
       {String? orderId, required String name, required String img});
 
+  Future<OrderModel?> getOrderDetials({
+    String? orderId,
+  });
+
+  Future orderProductsUpdate(
+      {required int id, required List<Map<String, int>> products});
+
   Future<String?> uploadFile({required String localImg});
 
   Future deleteFile({required String name});
@@ -38,4 +45,7 @@ abstract class AppApiProvider {
   Future deleteInvoice({required int invoiceId});
 
   Future<List<InvoiceModel>> invoices();
+
+  Future updateInvoice(
+      {required int id, required Map<String, dynamic> invoice});
 }

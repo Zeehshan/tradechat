@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
 import '../../../../configs/routes/app_routes.dart';
 
 import '../../../../controllers/controllers.dart';
@@ -12,12 +13,7 @@ class OrderWidget extends GetView<OrderDetailsController> {
 
   @override
   Widget build(BuildContext context) {
-    String date = '';
-    final DateTime messageData = DateTime.now();
-
-    date =
-        '${DateFormat.yMMMd().format(messageData)} ${DateFormat.jm().format(messageData)}';
-    return Container(
+    return Obx(() => Container(
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         decoration: BoxDecoration(
             color: Colors.white,
@@ -30,7 +26,9 @@ class OrderWidget extends GetView<OrderDetailsController> {
                   offset: const Offset(0, 0))
             ]),
         child: TextButton(
-          onPressed: () => Get.toNamed(AppRoutes.addNewOrder),
+          onPressed: controller.isEditView.value != true
+              ? null
+              : () => Get.toNamed(AppRoutes.addNewOrder),
           style: TextButton.styleFrom(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -40,74 +38,85 @@ class OrderWidget extends GetView<OrderDetailsController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        NetworkImageWidget(
-                          width: 80,
-                          height: 80,
-                          imageUrl: Tools.displayImage(controller
-                              .myOrdersController.slectedOrder?.image),
-                          borderRadius: 2,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text.rich(TextSpan(
-                                text: 'Order name:',
-                                style: Theme.of(context).textTheme.labelMedium,
-                                children: [
-                                  TextSpan(
-                                      text: ' 323544',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge!
-                                          .copyWith(fontSize: 14))
-                                ])),
-                            const SizedBox(
-                              height: 4,
-                            ),
-                            Text.rich(TextSpan(
-                                text: 'Order#:',
-                                style: Theme.of(context).textTheme.labelMedium,
-                                children: [
-                                  TextSpan(
-                                      text: ' 8877658700',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge!
-                                          .copyWith(fontSize: 14))
-                                ])),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      date,
-                      style: Theme.of(context).textTheme.labelMedium,
-                    ),
-                  ],
-                ),
-              ),
-              Obx(() => controller.isEditView.value
-                  ? const Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      color: Colors.black,
-                    )
-                  : Container())
+              GetBuilder<MyOrdersController>(builder: (myOrdersController) {
+                String date = '';
+                final DateTime messageData =
+                    DateTime.parse(myOrdersController.slectedOrder!.createdAt);
+
+                date =
+                    '${DateFormat.yMMMd().format(messageData)} ${DateFormat.jm().format(messageData)}';
+                return Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          NetworkImageWidget(
+                            width: 80,
+                            height: 80,
+                            imageUrl: Tools.displayImage(
+                                myOrdersController.slectedOrder?.image),
+                            borderRadius: 2,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text.rich(TextSpan(
+                                  text: 'Order name:',
+                                  style:
+                                      Theme.of(context).textTheme.labelMedium,
+                                  children: [
+                                    TextSpan(
+                                        text:
+                                            ' ${myOrdersController.slectedOrder!.name}',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge!
+                                            .copyWith(fontSize: 14))
+                                  ])),
+                              const SizedBox(
+                                height: 4,
+                              ),
+                              Text.rich(TextSpan(
+                                  text: 'Order#:',
+                                  style:
+                                      Theme.of(context).textTheme.labelMedium,
+                                  children: [
+                                    TextSpan(
+                                        text:
+                                            ' ${myOrdersController.slectedOrder!.id}',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge!
+                                            .copyWith(fontSize: 14))
+                                  ])),
+                            ],
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        date,
+                        style: Theme.of(context).textTheme.labelMedium,
+                      ),
+                    ],
+                  ),
+                );
+              }),
+              if (controller.isEditView.value)
+                const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: Colors.black,
+                )
             ],
           ),
-        ));
+        )));
   }
 }

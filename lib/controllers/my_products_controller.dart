@@ -17,6 +17,8 @@ class MyProductsController extends GetxController {
 
   RxString searchQuery = ''.obs;
 
+  RxBool loadmore = false.obs;
+
   @override
   void onInit() async {
     super.onInit();
@@ -65,6 +67,23 @@ class MyProductsController extends GetxController {
           uiStatus: GetStateUIStatus.error,
           uiAction: GetStateUIActionModel(
               message: error.message, type: GetStateUIActionType.failure));
+    }
+  }
+
+  loadMoreProducts() async {
+    try {
+      loadmore.value = true;
+      final MyProductModel? response = await apiRepostory.myProducts(
+          currentPage: data!.value.currentPage + 1);
+      if (response != null) {
+        products.addAll(response.products);
+        logger.d(products.length);
+        data = response.obs;
+      }
+      loadmore.value = false;
+    } catch (e) {
+      logger.e(runtimeType, '${e.runtimeType}::${e.toString()}');
+      loadmore.value = false;
     }
   }
 

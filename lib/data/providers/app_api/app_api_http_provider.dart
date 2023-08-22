@@ -3,16 +3,12 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 
 import '../../../configs/apis/apis.dart';
-import '../../../models/invoice/invoice_model.dart';
-import '../../../models/local_img/local_img_model.dart';
-import '../../../models/my_product/my_product_model.dart';
-import '../../../models/order/order_model.dart';
-import '../../../utils/utils.dart';
+import '../../../models/models.dart';
 import '../providers.dart';
 
 class AppApiHttpProvider extends BaseApiProvider implements AppApiProvider {
   @override
-  Future addProduct(
+  Future<MyProductDataModel> addProduct(
       {required String title,
       required String link,
       required String qty,
@@ -31,16 +27,16 @@ class AppApiHttpProvider extends BaseApiProvider implements AppApiProvider {
         'image': imgs.join(',')
       };
       final response = await backendApiReq.post(path, data: jsonEncode(data));
-      return response;
+      return MyProductDataModel.fromJson(response.data);
     } catch (e) {
       rethrow;
     }
   }
 
   @override
-  Future<MyProductModel?> myProducts() async {
+  Future<MyProductModel?> myProducts({int currentPage = 1}) async {
     try {
-      String path = BackendApis.myProducts;
+      String path = '${BackendApis.myProducts}?page=$currentPage';
       final response = await backendApiReq.get(path);
       final myProducts = MyProductModel.fromJson(response.data);
       return myProducts;
@@ -98,16 +94,19 @@ class AppApiHttpProvider extends BaseApiProvider implements AppApiProvider {
       String path =
           orderId == null ? BackendApis.order : '${BackendApis.order}/$orderId';
       final data = {
-        'name': name, 'image': img,
-
-        ///TOD:
-        'products': []
+        'name': name,
+        'image': img,
       };
       final response = orderId != null
           ? await backendApiReq.put(path, data: jsonEncode(data))
           : await backendApiReq.post(path, data: jsonEncode(data));
-      final order = OrderModel.fromJson(response.data);
-      return order;
+      if (orderId != null) {
+        final orderDetails = await getOrderDetials(orderId: orderId);
+        return orderDetails;
+      } else {
+        final order = OrderModel.fromJson(response.data);
+        return order;
+      }
     } catch (e) {
       rethrow;
     }
@@ -197,6 +196,47 @@ class AppApiHttpProvider extends BaseApiProvider implements AppApiProvider {
 
       final data = {'url': name};
       await backendApiReq.delete(path, data: data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future orderProductsUpdate(
+      {required int id, required List<Map<String, int>> products}) async {
+    try {
+      String path = '${BackendApis.order}/$id';
+      final data = {
+        'products': products,
+      };
+      await backendApiReq.put(path, data: jsonEncode(data));
+      final orderDetails = getOrderDetials(orderId: id.toString());
+      return orderDetails;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<OrderModel?> getOrderDetials({String? orderId}) async {
+    try {
+      String path = '${BackendApis.order}/$orderId';
+      final response = await backendApiReq.get(path);
+      final order = OrderModel.fromJson(response.data);
+      return order;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future updateInvoice(
+      {required int id, required Map<String, dynamic> invoice}) async {
+    try {
+      String path = '${BackendApis.invoice}/$id';
+      final response = await backendApiReq.put(path, data: jsonEncode(invoice));
+      // final order = InvoiceModel.fromJson(response.data);
+      // return order;
     } catch (e) {
       rethrow;
     }

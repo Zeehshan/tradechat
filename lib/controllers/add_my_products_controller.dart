@@ -126,7 +126,7 @@ class AddMyProductsController extends GetxController {
   addData() async {
     try {
       isLoading.value = true;
-      await apiRepostory.addProduct(
+      final p = await apiRepostory.addProduct(
           title: title.value,
           link: link.value,
           qty: qty.value,
@@ -134,10 +134,10 @@ class AddMyProductsController extends GetxController {
           description: description.value,
           imgs: localImages);
       isLoading.value = false;
-      myProductsController.getMyProducts();
-      Get.back();
+      Get.back(result: p);
       // Alerts.snackBarSuccess(
       //     title: 'Success', message: 'The product was added');
+      myProductsController.getMyProducts();
     } catch (e) {
       isLoading.value = false;
       logger.e(runtimeType, '${e.runtimeType}::${e.toString()}');

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../controllers/controllers.dart';
 import '../../../../utils/utils.dart';
+import '../../../dialogs/dialogs.dart';
 import '../../../widgets/widgets.dart';
 
 class ProductsWidget extends GetView<MyProductsController> {
@@ -18,7 +19,6 @@ class ProductsWidget extends GetView<MyProductsController> {
           itemCount: controller.products.length,
           itemBuilder: (context, index) {
             final p = controller.products[index];
-            logger.d(p.image?.split(',').toList()[0]);
             if (value.toLowerCase().contains(p.title.toLowerCase())) {
               return Container();
             }
@@ -89,7 +89,18 @@ class ProductsWidget extends GetView<MyProductsController> {
                                     padding: EdgeInsets.zero,
                                     constraints: const BoxConstraints(
                                         maxWidth: 20, maxHeight: 20),
-                                    onPressed: () => controller.delete(p.id),
+                                    onPressed: () {
+                                      Future.value().then((value) =>
+                                          WarningAlertDialog.warningAlertDialog(
+                                                  context: context,
+                                                  message:
+                                                      'Are you sure you want to delete this Product.?')
+                                              .then((v) {
+                                            if (v == true) {
+                                              controller.delete(p.id);
+                                            }
+                                          }));
+                                    },
                                     icon: const Icon(
                                       Icons.delete_forever,
                                       size: 22,
@@ -114,7 +125,7 @@ class ProductsWidget extends GetView<MyProductsController> {
                         Row(
                           children: [
                             Text.rich(TextSpan(
-                                text: 'Quantity:',
+                                text: 'Price: ',
                                 style: Theme.of(context)
                                     .textTheme
                                     .displaySmall!
@@ -122,7 +133,7 @@ class ProductsWidget extends GetView<MyProductsController> {
                                 children: [
                                   const TextSpan(text: ''),
                                   TextSpan(
-                                    text: p.quantity.toString(),
+                                    text: '¥${p.price}',
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleLarge!
@@ -131,7 +142,7 @@ class ProductsWidget extends GetView<MyProductsController> {
                                 ])),
                             const Spacer(),
                             Text.rich(TextSpan(
-                                text: 'Quantity:',
+                                text: 'Quantity: ',
                                 style: Theme.of(context)
                                     .textTheme
                                     .displaySmall!

@@ -5,7 +5,7 @@ class AppApiRepostory {
   final AppApiProvider apiProvider;
   AppApiRepostory() : apiProvider = AppApiHttpProvider();
 
-  Future addProduct(
+  Future<MyProductDataModel> addProduct(
       {required String title,
       required String link,
       required String qty,
@@ -25,9 +25,9 @@ class AppApiRepostory {
     }
   }
 
-  Future<MyProductModel?> myProducts() async {
+  Future<MyProductModel?> myProducts({int currentPage = 1}) async {
     try {
-      return await apiProvider.myProducts();
+      return await apiProvider.myProducts(currentPage: currentPage);
     } catch (e) {
       rethrow;
     }
@@ -124,6 +124,34 @@ class AppApiRepostory {
   Future deleteFile({required String name}) async {
     try {
       await apiProvider.deleteFile(name: name);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future orderProductsUpdate(
+      {required int id, required List<Map<String, int>> products}) async {
+    try {
+      await apiProvider.orderProductsUpdate(id: id, products: products);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<OrderModel?> getOrderDetials({
+    String? orderId,
+  }) async {
+    try {
+      return await apiProvider.getOrderDetials(orderId: orderId);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future updateInvoice(
+      {required int id, required Map<String, dynamic> invoice}) async {
+    try {
+      return await apiProvider.updateInvoice(id: id, invoice: invoice);
     } catch (e) {
       rethrow;
     }

@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 import '../configs/routes/app_routes.dart';
 import '../data/repositories/repositories.dart';
-import '../models/profile/profile_model.dart';
+import '../models/models.dart';
 import '../utils/utils.dart';
 import 'controllers.dart';
 
@@ -11,6 +11,7 @@ class AuthenticationController extends GetxController {
   final UserRepository _userRepository = Get.find();
   final SecureStorage secureStorage = SecureStorage();
   Rx<ProfileModel> profile = ProfileModel(user: null).obs;
+  Rx<CompanyModel> company = CompanyModel().obs;
 
   ///
   final myOrderController = Get.find<MyOrdersController>();
@@ -34,6 +35,7 @@ class AuthenticationController extends GetxController {
     } else {
       myOrderController.myorders();
       Get.offAllNamed(AppRoutes.scaffolNavbar);
+      refreshCompany();
     }
   }
 
@@ -71,6 +73,15 @@ class AuthenticationController extends GetxController {
       if (_user != null) {
         profile.value = _user;
       }
+    } catch (e) {
+      logger.e(e);
+    }
+  }
+
+  Future refreshCompany() async {
+    try {
+      final _company = await _userRepository.getCompany();
+      company.value = _company;
     } catch (e) {
       logger.e(e);
     }

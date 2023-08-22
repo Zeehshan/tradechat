@@ -11,6 +11,7 @@ class UserModel with _$UserModel {
       required String? lastName,
       required String? username,
       required String? phoneNumber,
+      String? profilePic,
       required String email,
       required String? settings,
       required String createdAt,

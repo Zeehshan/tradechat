@@ -14,3 +14,5 @@ export 'add_multi_product/add_multi_product_page.dart';
 export 'invoices/invoices_page.dart';
 export 'my_products/my_products_page.dart';
 export 'add_update_my_product/add_update_my_product_page.dart';
+export 'invoice_details/invoice_details_page.dart';
+export 'edit_profile/edit_profile_page.dart';

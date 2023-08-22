@@ -8,3 +8,4 @@ export 'order_details_binding.dart';
 export 'login_binding.dart';
 export 'signup_binding.dart';
 export 'add_my_products_binding.dart';
+export 'edit_profile_binding.dart';

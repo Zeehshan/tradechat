@@ -7,7 +7,7 @@ class BodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
+    return const CustomScrollView(
       slivers: [
         MyProfileAppbarWidget(),
         SliverToBoxAdapter(

@@ -52,13 +52,31 @@ class UserRepository {
       {String? firstanme,
       String? lastname,
       String? phone,
-      String? username}) async {
+      String? username,
+      String? profilePic}) async {
     try {
       return await userApiProvider.updateProfile(
           firstanme: firstanme,
           lastname: lastname,
           phone: phone,
-          username: username);
+          username: username,
+          profilePic: profilePic);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<CompanyModel> getCompany() async {
+    try {
+      return await userApiProvider.getCompany();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future updateCompany({required CompanyModel company}) async {
+    try {
+      return await userApiProvider.updateCompany(company: company);
     } catch (e) {
       rethrow;
     }

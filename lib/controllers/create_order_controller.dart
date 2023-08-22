@@ -37,7 +37,7 @@ class CreateOrderController extends GetxController {
         _ready();
       }
     } catch (e) {
-      //
+      logger.d(e);
     }
   }
 

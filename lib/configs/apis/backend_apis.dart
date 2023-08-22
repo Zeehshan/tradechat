@@ -20,4 +20,6 @@ class BackendApis {
   static const fileDelete = '/file/delete';
 
   static const displayFile = '/file/download?filename=';
+
+  static const company = '/company';
 }

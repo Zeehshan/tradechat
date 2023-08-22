@@ -59,4 +59,14 @@ final routes = [
     name: AppRoutes.addUpdateMyProduct,
     page: () => const AddUpdteMyProductPage(),
   ),
+
+  GetPage(
+    name: AppRoutes.invoiceDetails,
+    page: () => const InvoiceDetailsPage(),
+  ),
+
+  GetPage(
+      name: AppRoutes.editProfile,
+      page: () => const EditProfilePage(),
+      binding: EditProfileBinding()),
 ];

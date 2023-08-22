@@ -25,6 +25,7 @@ mixin _$UserModel {
   String? get lastName => throw _privateConstructorUsedError;
   String? get username => throw _privateConstructorUsedError;
   String? get phoneNumber => throw _privateConstructorUsedError;
+  String? get profilePic => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String? get settings => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
@@ -49,6 +50,7 @@ abstract class $UserModelCopyWith<$Res> {
       String? lastName,
       String? username,
       String? phoneNumber,
+      String? profilePic,
       String email,
       String? settings,
       String createdAt,
@@ -75,6 +77,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? lastName = freezed,
     Object? username = freezed,
     Object? phoneNumber = freezed,
+    Object? profilePic = freezed,
     Object? email = null,
     Object? settings = freezed,
     Object? createdAt = null,
@@ -102,6 +105,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
       phoneNumber: freezed == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profilePic: freezed == profilePic
+          ? _value.profilePic
+          : profilePic // ignore: cast_nullable_to_non_nullable
               as String?,
       email: null == email
           ? _value.email
@@ -144,6 +151,7 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       String? lastName,
       String? username,
       String? phoneNumber,
+      String? profilePic,
       String email,
       String? settings,
       String createdAt,
@@ -168,6 +176,7 @@ class __$$_UserModelCopyWithImpl<$Res>
     Object? lastName = freezed,
     Object? username = freezed,
     Object? phoneNumber = freezed,
+    Object? profilePic = freezed,
     Object? email = null,
     Object? settings = freezed,
     Object? createdAt = null,
@@ -195,6 +204,10 @@ class __$$_UserModelCopyWithImpl<$Res>
       phoneNumber: freezed == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profilePic: freezed == profilePic
+          ? _value.profilePic
+          : profilePic // ignore: cast_nullable_to_non_nullable
               as String?,
       email: null == email
           ? _value.email
@@ -233,6 +246,7 @@ class _$_UserModel implements _UserModel {
       required this.lastName,
       required this.username,
       required this.phoneNumber,
+      this.profilePic,
       required this.email,
       required this.settings,
       required this.createdAt,
@@ -254,6 +268,8 @@ class _$_UserModel implements _UserModel {
   @override
   final String? phoneNumber;
   @override
+  final String? profilePic;
+  @override
   final String email;
   @override
   final String? settings;
@@ -268,7 +284,7 @@ class _$_UserModel implements _UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, firstName: $firstName, lastName: $lastName, username: $username, phoneNumber: $phoneNumber, email: $email, settings: $settings, createdAt: $createdAt, updatedAt: $updatedAt, personalWalletBalance: $personalWalletBalance, companyWalletBalance: $companyWalletBalance)';
+    return 'UserModel(id: $id, firstName: $firstName, lastName: $lastName, username: $username, phoneNumber: $phoneNumber, profilePic: $profilePic, email: $email, settings: $settings, createdAt: $createdAt, updatedAt: $updatedAt, personalWalletBalance: $personalWalletBalance, companyWalletBalance: $companyWalletBalance)';
   }
 
   @override
@@ -285,6 +301,8 @@ class _$_UserModel implements _UserModel {
                 other.username == username) &&
             (identical(other.phoneNumber, phoneNumber) ||
                 other.phoneNumber == phoneNumber) &&
+            (identical(other.profilePic, profilePic) ||
+                other.profilePic == profilePic) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.settings, settings) ||
                 other.settings == settings) &&
@@ -307,6 +325,7 @@ class _$_UserModel implements _UserModel {
       lastName,
       username,
       phoneNumber,
+      profilePic,
       email,
       settings,
       createdAt,
@@ -335,6 +354,7 @@ abstract class _UserModel implements UserModel {
       required final String? lastName,
       required final String? username,
       required final String? phoneNumber,
+      final String? profilePic,
       required final String email,
       required final String? settings,
       required final String createdAt,
@@ -355,6 +375,8 @@ abstract class _UserModel implements UserModel {
   String? get username;
   @override
   String? get phoneNumber;
+  @override
+  String? get profilePic;
   @override
   String get email;
   @override

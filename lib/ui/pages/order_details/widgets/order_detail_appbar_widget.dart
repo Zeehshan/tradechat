@@ -8,6 +8,7 @@ class MyOrderAppbarWidget extends GetView<OrderDetailsController> {
 
   @override
   Widget build(BuildContext context) {
+    final myOrdersController = Get.find<MyOrdersController>();
     return SliverAppBar(
       floating: false,
       pinned: true,
@@ -15,7 +16,7 @@ class MyOrderAppbarWidget extends GetView<OrderDetailsController> {
       iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
       elevation: 3,
       title: Text(
-        'Order#1231212121',
+        'Order#${myOrdersController.slectedOrder!.id}',
         style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 16),
       ),
       centerTitle: true,

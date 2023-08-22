@@ -78,25 +78,56 @@ class UserApiHttpProvider extends BaseApiProvider implements UserApiProvider {
   }
 
   @override
-  Future updateProfile(
-      {String? firstanme,
-      String? lastname,
-      String? phone,
-      String? username}) async {
+  Future updateProfile({
+    String? firstanme,
+    String? lastname,
+    String? phone,
+    String? username,
+    String? profilePic,
+  }) async {
     try {
       String path = BackendApis.updateProfile;
       final data = <String, dynamic>{
         'firstName': firstanme,
         'lastName': lastname,
-        'username': 'mahin'
+        'username': username,
+        'profilePic': profilePic,
       };
       if (phone != null) {
-        String phone0 = phone.replaceAll('+', '00');
-        data['phoneNumber'] = int.tryParse(phone0);
+        try {
+          String phone0 = phone.replaceAll('+', '00');
+          data['phoneNumber'] = int.tryParse(phone0);
+        } catch (e) {
+          data['phoneNumber'] = int.tryParse(phone);
+        }
       }
       data.removeWhere((key, value) => value == null);
-      final response = await backendApiReq.post(path, data: jsonEncode(data));
+      final response = await backendApiReq.put(path, data: jsonEncode(data));
       return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<CompanyModel> getCompany() async {
+    try {
+      const path = BackendApis.company;
+      final response = await backendApiReq.get(path);
+      final companyModel = CompanyModel.fromJson(response.data);
+      return companyModel;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future updateCompany({required CompanyModel company}) async {
+    try {
+      const path = BackendApis.company;
+      final data = company.toJson();
+      data.removeWhere((key, value) => value == null);
+      await backendApiReq.post(path, data: data);
     } catch (e) {
       rethrow;
     }

@@ -40,27 +40,43 @@ class _ImageWidgetState extends State<ImageWidget> {
               strokeWidth: 2,
               child: InkWell(
                 onTap: () => createPController.imageChanged(),
-                child: SizedBox(
-                  height: 200,
-                  child: createPController.image.value != ''
-                      ? createPController.image.value.contains('user')
-                          ? Center(
-                              child: Image.file(
-                                  File(createPController.image.value)))
-                          : NetworkImageWidget(
-                              borderRadius: 0,
-                              height: 200,
-                              width: double.infinity,
-                              boxFit: BoxFit.contain,
-                              imageUrl: Tools.displayImage(
-                                  createPController.image.value))
-                      : Center(
-                          child: Text(
-                            'Click to upload image',
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.displayMedium,
-                          ),
-                        ),
+                child: Stack(
+                  children: [
+                    SizedBox(
+                      height: 200,
+                      child: createPController.image.value != ''
+                          ? createPController.image.value.contains('user')
+                              ? Center(
+                                  child: Image.file(
+                                      File(createPController.image.value)))
+                              : NetworkImageWidget(
+                                  borderRadius: 0,
+                                  height: 200,
+                                  width: double.infinity,
+                                  boxFit: BoxFit.contain,
+                                  imageUrl: Tools.displayImage(
+                                      createPController.image.value))
+                          : Center(
+                              child: Text(
+                                'Click to upload image',
+                                textAlign: TextAlign.center,
+                                style:
+                                    Theme.of(context).textTheme.displayMedium,
+                              ),
+                            ),
+                    ),
+                    if (createPController.image.value != '')
+                      Positioned(
+                        bottom: 10,
+                        right: 10,
+                        child: ElevatedButtonWidget(
+                            width: 120,
+                            height: 28,
+                            borderRadius: 100,
+                            child: const Text('Change Image'),
+                            onPressed: () => createPController.imageChanged()),
+                      ),
+                  ],
                 ),
               )),
         ));

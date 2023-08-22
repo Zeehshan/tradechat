@@ -13,6 +13,15 @@ abstract class UserApiProvider {
   Future resetPassword(
       {required String oldPassword, required String newPassword});
 
-  Future updateProfile(
-      {String? firstanme, String? lastname, String? phone, String? username});
+  Future updateProfile({
+    String? firstanme,
+    String? lastname,
+    String? phone,
+    String? username,
+    String? profilePic,
+  });
+
+  Future<CompanyModel> getCompany();
+
+  Future updateCompany({required CompanyModel company});
 }

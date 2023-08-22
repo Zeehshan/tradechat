@@ -9,8 +9,8 @@ class MyProductDataModel with _$MyProductDataModel {
     required int id,
     required String title,
     required String link,
-    required int quantity,
-    required int price,
+    @StringToIntConverter() required int quantity,
+    @StringToIntConverter() required int price,
     required String? image,
     required String? description,
     required int userId,
@@ -20,4 +20,13 @@ class MyProductDataModel with _$MyProductDataModel {
 
   factory MyProductDataModel.fromJson(json) =>
       _$MyProductDataModelFromJson(json);
+}
+
+class StringToIntConverter implements JsonConverter<int, dynamic> {
+  const StringToIntConverter();
+  @override
+  int fromJson(dynamic json) => json is int ? json : int.parse(json);
+
+  @override
+  dynamic toJson(int object) => object.toString();
 }

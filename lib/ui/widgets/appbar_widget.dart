@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tradechat/configs/themes/themes.dart';
+import '../../configs/themes/themes.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final Widget? title;

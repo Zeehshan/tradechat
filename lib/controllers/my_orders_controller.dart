@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../configs/routes/app_routes.dart';
 import '../data/repositories/repositories.dart';
@@ -14,6 +15,9 @@ class MyOrdersController extends GetxController {
   RxList<OrderModel> orders = <OrderModel>[].obs;
 
   OrderModel? slectedOrder;
+
+  String selectedOrderTotalPrice = '';
+
 
   @override
   void onInit() async {
@@ -69,7 +73,9 @@ class MyOrdersController extends GetxController {
     orders.removeAt(index);
     orders.insert(index, order);
     slectedOrder = order;
+
     update();
+    _totalPrice();
   }
 
   deleteOrder(int id) async {
@@ -92,12 +98,38 @@ class MyOrdersController extends GetxController {
     }
   }
 
-  selectedOrder(OrderModel order) async {
+  selectedOrder(OrderModel? order) async {
     slectedOrder = order;
-    await Get.toNamed(AppRoutes.myOrderDetails);
+    if (order != null) {
+      selectedOrderTotalPrice = '';
+      _totalPrice();
+
+      await Get.toNamed(AppRoutes.myOrderDetails);
+    }
+  }
+
+  updateOrderCalled(OrderModel? order) {
+    slectedOrder = order;
   }
 
   removeOverlay() {
     Get.back();
   }
+
+  _totalPrice() {
+    try {
+      List<int> prices = [];
+      for (final p in slectedOrder!.orderProducts) {
+        prices.add(p.quantity * p.product!.price);
+      }
+      int total = prices.reduce((a, b) => a + b);
+      selectedOrderTotalPrice =
+          NumberFormat.compactCurrency(decimalDigits: 0, symbol: '')
+              .format(total);
+      update();
+    } catch (e) {
+      ///
+    }
+  }
+
 }

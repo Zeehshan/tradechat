@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
 import '../../../../configs/routes/app_routes.dart';
 import '../../../../controllers/controllers.dart';
 import '../../../../models/models.dart';
 import '../../../../utils/utils.dart';
+import '../../../dialogs/dialogs.dart' as dialogs;
 import '../../../widgets/widgets.dart';
 
 class OrderWidget extends StatelessWidget {
@@ -88,17 +88,28 @@ class OrderWidget extends StatelessWidget {
                           width: 6,
                         ),
                         Text(
-                          'Total products: 0',
+                          'Total products: ${order.orderProducts.length}',
                           style: Theme.of(context).textTheme.labelMedium,
                         ),
                         const Spacer(),
                         DropDownWidget(
                           onDelete: () {
-                            Future.value().then(
-                                (value) => controller.deleteOrder(order.id));
+                            Future.value().then((value) =>
+                                dialogs.WarningAlertDialog.warningAlertDialog(
+                                        context: context,
+                                        message:
+                                            'Are you sure you want to delete this order.?')
+                                    .then((v) {
+                                  if (v == true) {
+                                    controller.deleteOrder(order.id);
+                                  }
+                                }));
                           },
                           onEdit: () {
-                            Future.value().then((_) {});
+                            Future.value().then((_) {
+                              controller.updateOrderCalled(order);
+                              Get.toNamed(AppRoutes.addNewOrder);
+                            });
                           },
                         ),
                       ],

@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../models.dart';
+
 part 'order_model.g.dart';
 part 'order_model.freezed.dart';
 
@@ -12,6 +14,7 @@ class OrderModel with _$OrderModel {
     required String image,
     required String createdAt,
     required String updatedAt,
+    @Default([]) List<OrderProductModel> orderProducts,
   }) = _OrderModel;
 
   factory OrderModel.fromJson(json) => _$OrderModelFromJson(json);

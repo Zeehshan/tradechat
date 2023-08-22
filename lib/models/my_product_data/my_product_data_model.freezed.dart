@@ -23,7 +23,9 @@ mixin _$MyProductDataModel {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get link => throw _privateConstructorUsedError;
+  @StringToIntConverter()
   int get quantity => throw _privateConstructorUsedError;
+  @StringToIntConverter()
   int get price => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
@@ -47,8 +49,8 @@ abstract class $MyProductDataModelCopyWith<$Res> {
       {int id,
       String title,
       String link,
-      int quantity,
-      int price,
+      @StringToIntConverter() int quantity,
+      @StringToIntConverter() int price,
       String? image,
       String? description,
       int userId,
@@ -137,8 +139,8 @@ abstract class _$$_MyProductDataModelCopyWith<$Res>
       {int id,
       String title,
       String link,
-      int quantity,
-      int price,
+      @StringToIntConverter() int quantity,
+      @StringToIntConverter() int price,
       String? image,
       String? description,
       int userId,
@@ -220,8 +222,8 @@ class _$_MyProductDataModel implements _MyProductDataModel {
       {required this.id,
       required this.title,
       required this.link,
-      required this.quantity,
-      required this.price,
+      @StringToIntConverter() required this.quantity,
+      @StringToIntConverter() required this.price,
       required this.image,
       required this.description,
       required this.userId,
@@ -238,8 +240,10 @@ class _$_MyProductDataModel implements _MyProductDataModel {
   @override
   final String link;
   @override
+  @StringToIntConverter()
   final int quantity;
   @override
+  @StringToIntConverter()
   final int price;
   @override
   final String? image;
@@ -303,8 +307,8 @@ abstract class _MyProductDataModel implements MyProductDataModel {
       {required final int id,
       required final String title,
       required final String link,
-      required final int quantity,
-      required final int price,
+      @StringToIntConverter() required final int quantity,
+      @StringToIntConverter() required final int price,
       required final String? image,
       required final String? description,
       required final int userId,
@@ -321,8 +325,10 @@ abstract class _MyProductDataModel implements MyProductDataModel {
   @override
   String get link;
   @override
+  @StringToIntConverter()
   int get quantity;
   @override
+  @StringToIntConverter()
   int get price;
   @override
   String? get image;

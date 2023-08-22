@@ -14,6 +14,10 @@ _$_OrderModel _$$_OrderModelFromJson(Map<String, dynamic> json) =>
       image: json['image'] as String,
       createdAt: json['createdAt'] as String,
       updatedAt: json['updatedAt'] as String,
+      orderProducts: (json['orderProducts'] as List<dynamic>?)
+              ?.map(OrderProductModel.fromJson)
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$_OrderModelToJson(_$_OrderModel instance) =>
@@ -24,4 +28,5 @@ Map<String, dynamic> _$$_OrderModelToJson(_$_OrderModel instance) =>
       'image': instance.image,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
+      'orderProducts': instance.orderProducts,
     };

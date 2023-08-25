@@ -1,9 +1,10 @@
 import 'package:get/get.dart';
+
 import '../../controllers/controllers.dart';
 
-class AddnewOrderBinding extends Bindings {
+class GetUsersBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => AddNewOrderController());
+    Get.lazyPut(() => GetUsersController());
   }
 }

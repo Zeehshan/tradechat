@@ -241,4 +241,26 @@ class AppApiHttpProvider extends BaseApiProvider implements AppApiProvider {
       rethrow;
     }
   }
+
+  @override
+  Future<UserModel?> getUsersDetials() async {
+    try {
+      String path = BackendApis.getUsersAPI;
+      final response = await backendApiReq.get(path);
+      final users = UserModel.fromJson(response.data);
+      return users;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> deleteUsers({required int id}) async {
+    try {
+      String path = '${BackendApis.getUsersAPI}/$id';
+      await backendApiReq.delete(path);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

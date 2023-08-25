@@ -13,8 +13,8 @@ class AddMyProductsController extends GetxController {
   final AppApiRepostory apiRepostory = Get.find<AppApiRepostory>();
   Rx<GetStateManageUIModel> manageUI = GetStateManageUIModel.initial().obs;
 
-  final MyProductsController myProductsController =
-      Get.find<MyProductsController>();
+  final GetUsersController myProductsController =
+      Get.find<GetUsersController>();
   RxBool isReady = false.obs;
   RxBool isLoading = false.obs;
   RxList<String> localImages = const <String>[].obs;
@@ -137,7 +137,7 @@ class AddMyProductsController extends GetxController {
       Get.back(result: p);
       // Alerts.snackBarSuccess(
       //     title: 'Success', message: 'The product was added');
-      myProductsController.getMyProducts();
+      myProductsController.getUsers();
     } catch (e) {
       isLoading.value = false;
       logger.e(runtimeType, '${e.runtimeType}::${e.toString()}');
@@ -150,7 +150,7 @@ class AddMyProductsController extends GetxController {
     try {
       isLoading.value = true;
       await apiRepostory.editProduct(
-          id: myProductsController.selectedProduct!.id,
+          id: myProductsController.selectedUser!.id,
           title: title.value,
           link: link.value,
           price: price.value,
@@ -158,7 +158,7 @@ class AddMyProductsController extends GetxController {
           description: description.value,
           imgs: localImages);
       isLoading.value = false;
-      myProductsController.getMyProducts();
+      myProductsController.getUsers();
       Get.back();
       Alerts.snackBarSuccess(
           title: 'Success', message: 'The product was edited');

@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import '../../configs/apis/apis.dart';
 import '../../utils/utils.dart';
 
@@ -38,13 +36,10 @@ class BaseApiProvider {
           // authorization token (logged-in user)
           final String? _authenticationToken =
               await _secureStorage.getAuthenticationToken();
-
           if (_authenticationToken != null) {
             options.headers['Authorization'] = 'Bearer $_authenticationToken';
           }
-
           options.headers['Content-Type'] = 'application/json';
-
           return handler.next(options);
         },
         onResponse: (response, handler) {
@@ -57,7 +52,6 @@ class BaseApiProvider {
             // }
           } catch (e) {
             logger.d(runtimeType, '${e.runtimeType}::${e.toString()}');
-
             throw DioException(
                 requestOptions: response.requestOptions,
                 error: e,
@@ -76,7 +70,6 @@ class BaseApiProvider {
     dio.interceptors.add(
       LogInterceptor(requestBody: true, responseBody: true, request: true),
     );
-
     return dio;
   }
 }

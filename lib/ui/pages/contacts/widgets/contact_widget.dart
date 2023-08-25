@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-
 import '../../../dialogs/dialogs.dart';
 import '../../../widgets/widgets.dart';
 
 class ContactWidget extends StatelessWidget {
-  const ContactWidget({super.key});
-
+  const ContactWidget(
+      {super.key,
+      required this.userName,
+      required this.image,
+      required this.desc});
+  final String userName, image, desc;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,7 +45,7 @@ class ContactWidget extends StatelessWidget {
                 width: 60,
                 height: 60,
                 borderRadius: 100,
-                imageUrl: null,
+                imageUrl: image,
                 onPressed: () {},
               ),
             ),

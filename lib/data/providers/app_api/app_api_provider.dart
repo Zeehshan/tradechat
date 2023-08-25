@@ -29,6 +29,9 @@ abstract class AppApiProvider {
     String? orderId,
   });
 
+  Future<UserModel?> getUsersDetials();
+  Future<void> deleteUsers({required int id});
+
   Future orderProductsUpdate(
       {required int id, required List<Map<String, int>> products});
 

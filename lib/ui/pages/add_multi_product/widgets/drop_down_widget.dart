@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import '../../../widgets/widgets.dart';
-
 import '../../../../controllers/controllers.dart';
+import '../../../widgets/widgets.dart';
 import 'widgets.dart';
 
 class DropDownWidget extends GetView<OrderDetailsController> {

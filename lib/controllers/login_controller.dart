@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-
 import '../data/repositories/repositories.dart';
 import '../utils/utils.dart';
 import 'controllers.dart';
@@ -35,8 +34,7 @@ class LoginController extends GetxController {
     } catch (e) {
       isLoginPressed.value = false;
       logger.e(runtimeType, '${e.runtimeType}::${e.toString()}');
-      final error = e as DioException;
-      Alerts.snackBar(title: 'Error', message: error.message.toString());
+      Alerts.snackBar(title: 'Error', message: e.toString());
     }
   }
 }

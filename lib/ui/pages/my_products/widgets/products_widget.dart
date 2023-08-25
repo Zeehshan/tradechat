@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../controllers/controllers.dart';
 import '../../../../utils/utils.dart';
 import '../../../dialogs/dialogs.dart';

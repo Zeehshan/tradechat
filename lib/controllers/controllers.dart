@@ -13,3 +13,4 @@ export 'my_products_controller.dart';
 export 'create_order_controller.dart';
 export 'my_invoices_controller.dart';
 export 'edit_profile_controller.dart';
+export 'get_users_controller.dart';

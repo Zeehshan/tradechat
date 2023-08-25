@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
 import '../configs/routes/app_routes.dart';
 import '../data/repositories/repositories.dart';
 import '../models/models.dart';

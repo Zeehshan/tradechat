@@ -9,6 +9,7 @@ class BackendApis {
   static String updateProfile = '/auth/profile';
   static String addProduct = '/product';
   static String myProducts = '/product/list';
+  static String getUsersAPI = '/auth/users';
   static String deleteProduct = '/product/{productId}';
   static String updateProduct = '/product/{productId}';
   static const order = '/order';

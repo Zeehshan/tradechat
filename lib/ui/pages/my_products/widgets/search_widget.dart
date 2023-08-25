@@ -12,7 +12,7 @@ class SearchWidget extends StatefulWidget {
 
 class _SearchWidgetState extends State<SearchWidget> {
   late TextEditingController textEditingController;
-  final controller = Get.find<MyProductsController>();
+  final controller = Get.find<GetUsersController>();
   @override
   void initState() {
     super.initState();

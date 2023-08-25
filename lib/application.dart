@@ -15,7 +15,7 @@ class Application extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       theme: lightTheme,
-      initialRoute: AppRoutes.splash,
+      initialRoute: AppRoutes.chats,
       initialBinding: InitialBinding(),
       getPages: routes,
     );

@@ -148,6 +148,22 @@ class AppApiRepostory {
     }
   }
 
+  Future<UserModel?> getUserDetials({
+    String? orderId,
+  }) async {
+    try {
+      return await apiProvider.getUsersDetials();
+    } catch (e) {
+      rethrow;
+    }
+  }
+ Future<void> deleteUser({required int id}) async {
+    try {
+      await apiProvider.deleteProduct(id: id);
+    } catch (e) {
+      rethrow;
+    }
+  }
   Future updateInvoice(
       {required int id, required Map<String, dynamic> invoice}) async {
     try {

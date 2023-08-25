@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../../controllers/controllers.dart';
 import '../../painters/painters.dart';
 import 'widgets/widgets.dart';
 
@@ -8,6 +10,7 @@ class ContacsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(GetUsersController());
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(

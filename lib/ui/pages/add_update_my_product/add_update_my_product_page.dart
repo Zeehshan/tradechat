@@ -10,8 +10,8 @@ class AddUpdteMyProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MyProductsController myProductsController =
-        Get.find<MyProductsController>();
+    final GetUsersController myProductsController =
+        Get.find<GetUsersController>();
     return Scaffold(
       body: GetX<AddMyProductsController>(
           init: AddMyProductsController(),
@@ -21,7 +21,7 @@ class AddUpdteMyProductPage extends StatelessWidget {
               child: CustomScrollView(
                 slivers: [
                   SliverAppbarWidget(
-                    title: myProductsController.selectedProduct != null
+                    title: myProductsController.selectedUser != null
                         ? 'Update product'
                         : 'Add new product',
                   ),
@@ -50,11 +50,11 @@ class AddUpdteMyProductPage extends StatelessWidget {
                         margin: const EdgeInsets.symmetric(horizontal: 20),
                         onPressed: !controller.isReady.value
                             ? null
-                            : () => myProductsController.selectedProduct != null
+                            : () => myProductsController.selectedUser != null
                                 ? controller.updatedProduct()
                                 : controller.addData(),
                         child: Text(
-                          myProductsController.selectedProduct != null
+                          myProductsController.selectedUser != null
                               ? 'Update'
                               : 'Save',
                           style: Theme.of(context)

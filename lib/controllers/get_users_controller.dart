@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import '../configs/routes/app_routes.dart';
@@ -6,13 +7,12 @@ import '../models/models.dart';
 import '../ui/dialogs/dialogs.dart';
 import '../utils/utils.dart';
 
-class MyProductsController extends GetxController {
+class GetUsersController extends GetxController {
   final AppApiRepostory apiRepostory = Get.find<AppApiRepostory>();
   Rx<GetStateManageUIModel> manageUI = GetStateManageUIModel.initial().obs;
-  RxList<MyProductDataModel> products = <MyProductDataModel>[].obs;
-  Rx<MyProductModel>? data;
-  MyProductDataModel? selectedProduct;
-
+  RxList<UserModel> users = <UserModel>[].obs;
+  Rx<UserModel>? data;
+  UserModel? selectedUser;
   RxString searchQuery = ''.obs;
 
   RxBool loadmore = false.obs;
@@ -20,7 +20,7 @@ class MyProductsController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    getMyProducts();
+    getUsers();
     ever(manageUI, (value) {
       switch (value.uiAction.type) {
         case GetStateUIActionType.inProgress:
@@ -43,17 +43,18 @@ class MyProductsController extends GetxController {
         default:
       }
     });
+    log(users.toString());
   }
 
-  getMyProducts() async {
+  getUsers() async {
     try {
       manageUI.value = GetStateManageUIModel.initial();
-      final MyProductModel? response = await apiRepostory.myProducts();
+      final UserModel? response = await apiRepostory.getUserDetials();
       if (response != null) {
         logger.d('not null');
-        products.value = [];
-        products.addAll(response.products);
-        logger.d(products.length);
+        users.value = [];
+        users.add(response);
+        logger.d(users.length);
         data = response.obs;
       }
       manageUI.value =
@@ -67,14 +68,13 @@ class MyProductsController extends GetxController {
     }
   }
 
-  loadMoreProducts() async {
+  loadMoreUsers() async {
     try {
       loadmore.value = true;
-      final MyProductModel? response = await apiRepostory.myProducts(
-          currentPage: data!.value.currentPage + 1);
+      final UserModel? response = await apiRepostory.getUserDetials();
       if (response != null) {
-        products.addAll(response.products);
-        logger.d(products.length);
+        users.add(response);
+        logger.d(users.length);
         data = response.obs;
       }
       loadmore.value = false;
@@ -90,11 +90,11 @@ class MyProductsController extends GetxController {
           uiAction: const GetStateUIActionModel(
               type: GetStateUIActionType.inProgress));
 
-      await apiRepostory.deleteProduct(id: id);
-      products.removeWhere((element) => element.id == id);
+      await apiRepostory.deleteUser(id: id);
+      users.removeWhere((element) => element.id == id);
       manageUI.value = manageUI.value.copyWith(
           uiAction: const GetStateUIActionModel(
-              message: 'Product has been deleted',
+              message: 'User has been deleted',
               type: GetStateUIActionType.completed));
     } catch (e) {
       logger.e(runtimeType, '${e.runtimeType}::${e.toString()}');
@@ -105,11 +105,11 @@ class MyProductsController extends GetxController {
     }
   }
 
-  seelectedProductForEdit(MyProductDataModel? p) async {
-    selectedProduct = p;
+  seelectedUserForEdit(UserModel? p) async {
+    selectedUser = p;
     if (p != null) {
       await Get.toNamed(AppRoutes.addUpdateMyProduct);
-      selectedProduct = null;
+      selectedUser = null;
     }
   }
 

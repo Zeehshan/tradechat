@@ -5,6 +5,10 @@ class ThemeConfig {
   static const borderColor = Color.fromRGBO(235, 235, 235, 1);
   static const blackColorHard = Color(0xff0b1118);
 
+  static const chatRedColor = Color(0xffb91412);
+
+  static const chatGreenColor = Color(0xff96be25);
+
   /// fonts
   static const pubicSansBold = 'Pubic Sans Bold';
   static const pubicSansExtraBold = 'Pubic Sans Extra Bold';

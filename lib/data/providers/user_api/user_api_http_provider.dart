@@ -124,10 +124,26 @@ class UserApiHttpProvider extends BaseApiProvider implements UserApiProvider {
   @override
   Future updateCompany({required CompanyModel company}) async {
     try {
-      const path = BackendApis.company;
       final data = company.toJson();
+      logger.i(data);
+      const path = BackendApis.company;
       data.removeWhere((key, value) => value == null);
+      logger.d(company);
       await backendApiReq.post(path, data: data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future updatePaymentPassowrd({required String password}) async {
+    try {
+      String path = BackendApis.updateProfile;
+      final data = <String, dynamic>{
+        'settings': {'password': password}
+      };
+      data.removeWhere((key, value) => value == null);
+      await backendApiReq.put(path, data: jsonEncode(data));
     } catch (e) {
       rethrow;
     }

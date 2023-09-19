@@ -9,7 +9,7 @@ class ContactsBarWidget extends StatelessWidget {
     return SliverAppBar(
       pinned: true,
       elevation: 0,
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xffededed),
       iconTheme: const IconThemeData(color: ThemeConfig.primaryColor),
       centerTitle: true,
       title: Text(

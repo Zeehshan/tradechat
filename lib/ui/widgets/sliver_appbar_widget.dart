@@ -10,7 +10,7 @@ class SliverAppbarWidget extends StatelessWidget {
     return SliverAppBar(
       floating: false,
       pinned: true,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: const Color(0xffededed),
       elevation: 3,
       title: Text(
         title,

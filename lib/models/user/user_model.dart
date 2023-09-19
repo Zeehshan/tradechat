@@ -7,16 +7,24 @@ part 'user_model.g.dart';
 class UserModel with _$UserModel {
   factory UserModel(
       {required int id,
-      required String? firstName,
-      required String? lastName,
-      required String? username,
-      required String? phoneNumber,
+      String? firstName,
+      String? lastName,
+      String? role,
+      String? username,
+      String? phoneNumber,
       String? profilePic,
-      required String email,
-      required String? settings,
-      required String createdAt,
-      required String updatedAt,
-      required int personalWalletBalance,
-      required int companyWalletBalance}) = _UserModel;
+      String? email,
+      SettingModel? settings,
+      String? createdAt,
+      String? updatedAt,
+      int? personalWalletBalance,
+      int? companyWalletBalance}) = _UserModel;
   factory UserModel.fromJson(json) => _$UserModelFromJson(json);
+}
+
+@freezed
+class SettingModel with _$SettingModel {
+  factory SettingModel({required String password}) = _SettingModel;
+
+  factory SettingModel.fromJson(json) => _$SettingModelFromJson(json);
 }

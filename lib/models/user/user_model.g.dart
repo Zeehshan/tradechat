@@ -10,15 +10,18 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
       id: json['id'] as int,
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
+      role: json['role'] as String?,
       username: json['username'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
       profilePic: json['profilePic'] as String?,
-      email: json['email'] as String,
-      settings: json['settings'] as String?,
-      createdAt: json['createdAt'] as String,
-      updatedAt: json['updatedAt'] as String,
-      personalWalletBalance: json['personalWalletBalance'] as int,
-      companyWalletBalance: json['companyWalletBalance'] as int,
+      email: json['email'] as String?,
+      settings: json['settings'] == null
+          ? null
+          : SettingModel.fromJson(json['settings']),
+      createdAt: json['createdAt'] as String?,
+      updatedAt: json['updatedAt'] as String?,
+      personalWalletBalance: json['personalWalletBalance'] as int?,
+      companyWalletBalance: json['companyWalletBalance'] as int?,
     );
 
 Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
@@ -26,6 +29,7 @@ Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
       'id': instance.id,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
+      'role': instance.role,
       'username': instance.username,
       'phoneNumber': instance.phoneNumber,
       'profilePic': instance.profilePic,
@@ -35,4 +39,14 @@ Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
       'updatedAt': instance.updatedAt,
       'personalWalletBalance': instance.personalWalletBalance,
       'companyWalletBalance': instance.companyWalletBalance,
+    };
+
+_$_SettingModel _$$_SettingModelFromJson(Map<String, dynamic> json) =>
+    _$_SettingModel(
+      password: json['password'] as String,
+    );
+
+Map<String, dynamic> _$$_SettingModelToJson(_$_SettingModel instance) =>
+    <String, dynamic>{
+      'password': instance.password,
     };

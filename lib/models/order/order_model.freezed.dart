@@ -28,6 +28,7 @@ mixin _$OrderModel {
   String get updatedAt => throw _privateConstructorUsedError;
   List<OrderProductModel> get orderProducts =>
       throw _privateConstructorUsedError;
+  Map<String, dynamic> get documents => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,7 +49,8 @@ abstract class $OrderModelCopyWith<$Res> {
       String image,
       String createdAt,
       String updatedAt,
-      List<OrderProductModel> orderProducts});
+      List<OrderProductModel> orderProducts,
+      Map<String, dynamic> documents});
 }
 
 /// @nodoc
@@ -71,6 +73,7 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? orderProducts = null,
+    Object? documents = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -101,6 +104,10 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
           ? _value.orderProducts
           : orderProducts // ignore: cast_nullable_to_non_nullable
               as List<OrderProductModel>,
+      documents: null == documents
+          ? _value.documents
+          : documents // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
     ) as $Val);
   }
 }
@@ -120,7 +127,8 @@ abstract class _$$_OrderModelCopyWith<$Res>
       String image,
       String createdAt,
       String updatedAt,
-      List<OrderProductModel> orderProducts});
+      List<OrderProductModel> orderProducts,
+      Map<String, dynamic> documents});
 }
 
 /// @nodoc
@@ -141,6 +149,7 @@ class __$$_OrderModelCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? orderProducts = null,
+    Object? documents = null,
   }) {
     return _then(_$_OrderModel(
       id: null == id
@@ -171,6 +180,10 @@ class __$$_OrderModelCopyWithImpl<$Res>
           ? _value._orderProducts
           : orderProducts // ignore: cast_nullable_to_non_nullable
               as List<OrderProductModel>,
+      documents: null == documents
+          ? _value._documents
+          : documents // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
     ));
   }
 }
@@ -185,8 +198,10 @@ class _$_OrderModel implements _OrderModel {
       required this.image,
       required this.createdAt,
       required this.updatedAt,
-      final List<OrderProductModel> orderProducts = const []})
-      : _orderProducts = orderProducts;
+      final List<OrderProductModel> orderProducts = const [],
+      final Map<String, dynamic> documents = const {}})
+      : _orderProducts = orderProducts,
+        _documents = documents;
 
   factory _$_OrderModel.fromJson(Map<String, dynamic> json) =>
       _$$_OrderModelFromJson(json);
@@ -212,9 +227,18 @@ class _$_OrderModel implements _OrderModel {
     return EqualUnmodifiableListView(_orderProducts);
   }
 
+  final Map<String, dynamic> _documents;
+  @override
+  @JsonKey()
+  Map<String, dynamic> get documents {
+    if (_documents is EqualUnmodifiableMapView) return _documents;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_documents);
+  }
+
   @override
   String toString() {
-    return 'OrderModel(id: $id, userId: $userId, name: $name, image: $image, createdAt: $createdAt, updatedAt: $updatedAt, orderProducts: $orderProducts)';
+    return 'OrderModel(id: $id, userId: $userId, name: $name, image: $image, createdAt: $createdAt, updatedAt: $updatedAt, orderProducts: $orderProducts, documents: $documents)';
   }
 
   @override
@@ -231,7 +255,9 @@ class _$_OrderModel implements _OrderModel {
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             const DeepCollectionEquality()
-                .equals(other._orderProducts, _orderProducts));
+                .equals(other._orderProducts, _orderProducts) &&
+            const DeepCollectionEquality()
+                .equals(other._documents, _documents));
   }
 
   @JsonKey(ignore: true)
@@ -244,7 +270,8 @@ class _$_OrderModel implements _OrderModel {
       image,
       createdAt,
       updatedAt,
-      const DeepCollectionEquality().hash(_orderProducts));
+      const DeepCollectionEquality().hash(_orderProducts),
+      const DeepCollectionEquality().hash(_documents));
 
   @JsonKey(ignore: true)
   @override
@@ -268,7 +295,8 @@ abstract class _OrderModel implements OrderModel {
       required final String image,
       required final String createdAt,
       required final String updatedAt,
-      final List<OrderProductModel> orderProducts}) = _$_OrderModel;
+      final List<OrderProductModel> orderProducts,
+      final Map<String, dynamic> documents}) = _$_OrderModel;
 
   factory _OrderModel.fromJson(Map<String, dynamic> json) =
       _$_OrderModel.fromJson;
@@ -287,6 +315,8 @@ abstract class _OrderModel implements OrderModel {
   String get updatedAt;
   @override
   List<OrderProductModel> get orderProducts;
+  @override
+  Map<String, dynamic> get documents;
   @override
   @JsonKey(ignore: true)
   _$$_OrderModelCopyWith<_$_OrderModel> get copyWith =>

@@ -113,15 +113,29 @@ class AppApiHttpProvider extends BaseApiProvider implements AppApiProvider {
   }
 
   @override
-  Future<String?> uploadFile({
-    required String localImg,
-  }) async {
+  Future<String?> uploadFile(
+      {required String localImg,
+      Function(String file, double progress)? onReceiveProgress}) async {
     try {
       String path = BackendApis.file;
 
-      final data =
-          FormData.fromMap({'file': await MultipartFile.fromFile(localImg)});
-      final response = await backendApiReq.post(path, data: data);
+      final data = FormData.fromMap(
+        {'file': await MultipartFile.fromFile(localImg)},
+      );
+      final response = await backendApiReq.post(path,
+          data: data,
+          onReceiveProgress: onReceiveProgress == null
+              ? null
+              : (sentBytes, totalBytes) {
+                  double __progressValue = Util.remap(
+                      sentBytes.toDouble(), 0, totalBytes.toDouble(), 0, 1);
+                  __progressValue =
+                      double.parse(__progressValue.toStringAsFixed(2));
+                  onReceiveProgress(
+                    localImg,
+                    __progressValue,
+                  );
+                });
       return response.data['fileUrl'];
     } catch (e) {
       rethrow;
@@ -240,5 +254,131 @@ class AppApiHttpProvider extends BaseApiProvider implements AppApiProvider {
     } catch (e) {
       rethrow;
     }
+  }
+
+  @override
+  Future<int> createChat({required int id}) async {
+    try {
+      String path = BackendApis.chatRequest;
+      final response =
+          await backendApiReq.post(path, data: jsonEncode({'requesteeId': id}));
+      return response.data['chatId'] as int;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future orderDocumentsUpdate(
+      {required int id, required Map<String, dynamic> documents}) async {
+    try {
+      String path = '${BackendApis.order}/$id';
+      final data = {
+        'documents': documents,
+      };
+      await backendApiReq.put(path, data: jsonEncode(data));
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future addNewPayment(
+      {required int amount,
+      required String senderName,
+      required int orderNumber,
+      required int accountNumber,
+      required String accountType,
+      required String image}) async {
+    try {
+      String path = BackendApis.newPayment;
+      final data = {
+        'amount': amount,
+        'senderName': senderName,
+        'orderNumber': orderNumber,
+        'accountNumber': accountNumber,
+        'accountType': accountType,
+        'image': image
+      };
+      await backendApiReq.post(path, data: jsonEncode(data));
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future deletePayment({required int id}) async {
+    try {
+      String path = '${BackendApis.newPayment}/$id';
+      await backendApiReq.delete(path);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future updatePayment(
+      {required int id,
+      required int amount,
+      required String senderName,
+      required int orderNumber,
+      required int accountNumber,
+      required String accountType}) async {
+    try {
+      String path = '${BackendApis.newPayment}/$id';
+      final data = {
+        'amount': amount,
+        'senderName': senderName,
+        'orderNumber': orderNumber,
+        'accountNumber': accountNumber,
+        'accountType': accountType,
+      };
+      await backendApiReq.put(path, data: jsonEncode(data));
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<PaymentModel> confirmAmount(
+      {required int amount, required int id}) async {
+    try {
+      String path =
+          BackendApis.confirmPayment.replaceAll('{paymentId}', id.toString());
+      final data = {
+        'amount': amount,
+      };
+      final res = await backendApiReq.post(path, data: jsonEncode(data));
+      return PaymentModel.fromJson(res.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future deleteChat({required int id}) async {
+    try {
+      String path =
+          BackendApis.deleteChat.replaceAll('{chatId}', id.toString());
+      await backendApiReq.post(path);
+    } catch (e) {
+      rethrow;
+    }
+  }
+}
+
+class Util {
+  static double remap(
+      double value,
+      double originalMinValue,
+      double originalMaxValue,
+      double translatedMinValue,
+      double translatedMaxValue) {
+    if (originalMaxValue - originalMinValue == 0) return 0;
+
+    return (value - originalMinValue) /
+            (originalMaxValue - originalMinValue) *
+            (translatedMaxValue - translatedMinValue) +
+        translatedMinValue;
   }
 }

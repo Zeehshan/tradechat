@@ -11,16 +11,14 @@ class ScaffolWithNavbarWidget extends GetView<ScaffoldWithNavbarController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Obx(
-          () => IndexedStack(
-            index: controller.currentIndex.value,
-            children: const [
-              ChatsPage(),
-              MyOrdersPage(),
-              MyProfilePage(),
-            ],
-          ),
+      body: Obx(
+        () => IndexedStack(
+          index: controller.currentIndex.value,
+          children: const [
+            ChatsPage(),
+            MyOrdersPage(),
+            MyProfilePage(),
+          ],
         ),
       ),
       bottomNavigationBar: Obx(
@@ -32,7 +30,7 @@ class ScaffolWithNavbarWidget extends GetView<ScaffoldWithNavbarController> {
             BottomNavigationBarItem(
                 icon: FaIcon(FontAwesomeIcons.solidMessage), label: ''),
             BottomNavigationBarItem(
-                icon: FaIcon(FontAwesomeIcons.cartPlus), label: ''),
+                icon: FaIcon(FontAwesomeIcons.cartShopping), label: ''),
             BottomNavigationBarItem(
                 icon: FaIcon(FontAwesomeIcons.person), label: ''),
           ],

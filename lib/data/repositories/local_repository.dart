@@ -22,4 +22,12 @@ class LocalRepository {
       rethrow;
     }
   }
+
+  Future<String?> getFile() async {
+    try {
+      return await localApiProvider.getFile();
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

@@ -20,7 +20,7 @@ class ElevatedButtonWidget extends StatelessWidget {
       this.height,
       this.borderWidth = 0.0,
       this.elevation,
-      this.borderRadius = 8.0,
+      this.borderRadius = 4.0,
       this.showProgressIndicator = false,
       required this.onPressed,
       this.backgroundColor = ThemeConfig.primaryColor,

@@ -15,60 +15,62 @@ class OptionsWidget extends StatefulWidget {
 }
 
 class _OptionsWidgetState extends State<OptionsWidget> {
-  List<OptionModel> options = [
-    OptionModel(
-        const FaIcon(
-          FontAwesomeIcons.shop,
-          color: ThemeConfig.primaryColor,
-          size: 20,
-        ),
-        'My products'),
-    OptionModel(
-        const FaIcon(
-          FontAwesomeIcons.file,
-          color: ThemeConfig.primaryColor,
-          size: 25,
-        ),
-        'My Orders'),
-    OptionModel(
-        const FaIcon(
-          FontAwesomeIcons.fileInvoice,
-          color: ThemeConfig.primaryColor,
-          size: 25,
-        ),
-        'My Invoices'),
-    OptionModel(
-        const Icon(
-          CupertinoIcons.money_yen,
-          color: ThemeConfig.primaryColor,
-        ),
-        'My Payments'),
-    OptionModel(
-        const Icon(
-          CupertinoIcons.settings,
-          color: ThemeConfig.primaryColor,
-        ),
-        'Settings'),
-  ];
   final ScaffoldWithNavbarController scaffoldWithNavbarController = Get.find();
   @override
   Widget build(BuildContext context) {
+    List<OptionModel> options = [
+      OptionModel(
+          const FaIcon(
+            FontAwesomeIcons.cartPlus,
+            color: Color(0xffe1326c),
+            size: 20,
+          ),
+          'My products'),
+      OptionModel(
+          const FaIcon(
+            FontAwesomeIcons.cartShopping,
+            color: Color(0xff36add1),
+            size: 20,
+          ),
+          'My Orders'),
+      OptionModel(
+          const FaIcon(
+            FontAwesomeIcons.fileInvoice,
+            color: Color(0xff9abc28),
+            size: 20,
+          ),
+          'My Invoices'),
+      OptionModel(
+          const FaIcon(
+            FontAwesomeIcons.wallet,
+            color: Color(0xffffe102),
+          ),
+          'My Payments'),
+      OptionModel(
+          const Icon(
+            CupertinoIcons.settings,
+            color: Color(0xff858585),
+          ),
+          'Settings'),
+    ];
     return Column(
       children: List.generate(
           options.length,
           (index) => Container(
-                height: 42,
-                margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 7),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
-                      BoxShadow(
-                          blurRadius: 1,
-                          spreadRadius: 1,
-                          color: Colors.grey.withOpacity(.2),
-                          offset: const Offset(0, 0))
-                    ]),
+                height: 48,
+                margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                color: Colors.white,
+                // decoration: BoxDecoration(
+                //     color: Colors.white,
+                //     borderRadius: BorderRadius.circular(12),
+                //     boxShadow: [
+                //       BoxShadow(
+                //           blurRadius: 1,
+                //           spreadRadius: 1,
+                //           color: Colors.grey.withOpacity(.2),
+                //           offset: const Offset(0, 0))
+                //     ]),
                 child: TextButton(
                   style: TextButton.styleFrom(
                       shape: RoundedRectangleBorder(
@@ -91,9 +93,9 @@ class _OptionsWidgetState extends State<OptionsWidget> {
                             .copyWith(fontSize: 14),
                       ),
                       const Spacer(),
-                      Icon(
+                      const Icon(
                         Icons.arrow_forward_ios,
-                        color: Theme.of(context).primaryColor,
+                        color: Colors.black54,
                         size: 16,
                       )
                     ],
@@ -113,6 +115,13 @@ class _OptionsWidgetState extends State<OptionsWidget> {
         break;
       case 2:
         Get.toNamed(AppRoutes.invoices);
+        break;
+
+      case 3:
+        Get.toNamed(AppRoutes.payments);
+        break;
+      case 4:
+        Get.toNamed(AppRoutes.settings);
         break;
     }
   }

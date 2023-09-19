@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:tradechat/configs/routes/app_routes.dart';
 
-class ChatsAppbarWidget extends StatelessWidget {
+import '../../../../configs/routes/app_routes.dart';
+import '../../../../controllers/controllers.dart';
+import '../../../../models/models.dart';
+
+class ChatsAppbarWidget extends GetView<ChatsController> {
   const ChatsAppbarWidget({super.key});
 
   @override
@@ -12,11 +15,25 @@ class ChatsAppbarWidget extends StatelessWidget {
       floating: false,
       pinned: true,
       automaticallyImplyLeading: false,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: const Color(0xffededed),
       elevation: 3,
-      title: Text(
-        'Chats',
-        style: Theme.of(context).textTheme.titleLarge,
+      title: controller.obx(
+        (state) => Text(
+          'Chats (${((state?['chats'] ?? []) as List<ChatModel>).length})',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        onEmpty: Text(
+          'Chats',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        onError: (e) => Text(
+          'Chats',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        onLoading: Text(
+          'Chats',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
       ),
       centerTitle: true,
       actions: [

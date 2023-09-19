@@ -7,6 +7,6 @@ class MyProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const BodyWidget();
+    return Container(color: Color(0xffededed), child: const BodyWidget());
   }
 }

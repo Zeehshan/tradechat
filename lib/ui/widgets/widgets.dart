@@ -6,3 +6,7 @@ export 'banner_alert_widget.dart';
 export 'snackbar_widget.dart';
 export 'sliver_appbar_widget.dart';
 export 'drop_down_widget.dart';
+export 'user_image_widget.dart';
+export 'time_widget.dart';
+export 'rounded_card_widget.dart';
+export 'zoom_in_out_image_widget.dart';

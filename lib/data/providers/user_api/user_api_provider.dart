@@ -24,4 +24,6 @@ abstract class UserApiProvider {
   Future<CompanyModel> getCompany();
 
   Future updateCompany({required CompanyModel company});
+
+  Future updatePaymentPassowrd({required String password});
 }

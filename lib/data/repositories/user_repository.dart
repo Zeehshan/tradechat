@@ -81,4 +81,12 @@ class UserRepository {
       rethrow;
     }
   }
+
+  Future updatePaymentPassowrd({required String password}) async {
+    try {
+      return await userApiProvider.updatePaymentPassowrd(password: password);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

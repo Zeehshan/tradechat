@@ -23,15 +23,16 @@ mixin _$UserModel {
   int get id => throw _privateConstructorUsedError;
   String? get firstName => throw _privateConstructorUsedError;
   String? get lastName => throw _privateConstructorUsedError;
+  String? get role => throw _privateConstructorUsedError;
   String? get username => throw _privateConstructorUsedError;
   String? get phoneNumber => throw _privateConstructorUsedError;
   String? get profilePic => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
-  String? get settings => throw _privateConstructorUsedError;
-  String get createdAt => throw _privateConstructorUsedError;
-  String get updatedAt => throw _privateConstructorUsedError;
-  int get personalWalletBalance => throw _privateConstructorUsedError;
-  int get companyWalletBalance => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
+  SettingModel? get settings => throw _privateConstructorUsedError;
+  String? get createdAt => throw _privateConstructorUsedError;
+  String? get updatedAt => throw _privateConstructorUsedError;
+  int? get personalWalletBalance => throw _privateConstructorUsedError;
+  int? get companyWalletBalance => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,15 +49,18 @@ abstract class $UserModelCopyWith<$Res> {
       {int id,
       String? firstName,
       String? lastName,
+      String? role,
       String? username,
       String? phoneNumber,
       String? profilePic,
-      String email,
-      String? settings,
-      String createdAt,
-      String updatedAt,
-      int personalWalletBalance,
-      int companyWalletBalance});
+      String? email,
+      SettingModel? settings,
+      String? createdAt,
+      String? updatedAt,
+      int? personalWalletBalance,
+      int? companyWalletBalance});
+
+  $SettingModelCopyWith<$Res>? get settings;
 }
 
 /// @nodoc
@@ -75,15 +79,16 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? id = null,
     Object? firstName = freezed,
     Object? lastName = freezed,
+    Object? role = freezed,
     Object? username = freezed,
     Object? phoneNumber = freezed,
     Object? profilePic = freezed,
-    Object? email = null,
+    Object? email = freezed,
     Object? settings = freezed,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-    Object? personalWalletBalance = null,
-    Object? companyWalletBalance = null,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? personalWalletBalance = freezed,
+    Object? companyWalletBalance = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -98,6 +103,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
+      role: freezed == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String?,
       username: freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -110,31 +119,43 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.profilePic
           : profilePic // ignore: cast_nullable_to_non_nullable
               as String?,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       settings: freezed == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdAt: null == createdAt
+              as SettingModel?,
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      updatedAt: null == updatedAt
+              as String?,
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      personalWalletBalance: null == personalWalletBalance
+              as String?,
+      personalWalletBalance: freezed == personalWalletBalance
           ? _value.personalWalletBalance
           : personalWalletBalance // ignore: cast_nullable_to_non_nullable
-              as int,
-      companyWalletBalance: null == companyWalletBalance
+              as int?,
+      companyWalletBalance: freezed == companyWalletBalance
           ? _value.companyWalletBalance
           : companyWalletBalance // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SettingModelCopyWith<$Res>? get settings {
+    if (_value.settings == null) {
+      return null;
+    }
+
+    return $SettingModelCopyWith<$Res>(_value.settings!, (value) {
+      return _then(_value.copyWith(settings: value) as $Val);
+    });
   }
 }
 
@@ -149,15 +170,19 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       {int id,
       String? firstName,
       String? lastName,
+      String? role,
       String? username,
       String? phoneNumber,
       String? profilePic,
-      String email,
-      String? settings,
-      String createdAt,
-      String updatedAt,
-      int personalWalletBalance,
-      int companyWalletBalance});
+      String? email,
+      SettingModel? settings,
+      String? createdAt,
+      String? updatedAt,
+      int? personalWalletBalance,
+      int? companyWalletBalance});
+
+  @override
+  $SettingModelCopyWith<$Res>? get settings;
 }
 
 /// @nodoc
@@ -174,15 +199,16 @@ class __$$_UserModelCopyWithImpl<$Res>
     Object? id = null,
     Object? firstName = freezed,
     Object? lastName = freezed,
+    Object? role = freezed,
     Object? username = freezed,
     Object? phoneNumber = freezed,
     Object? profilePic = freezed,
-    Object? email = null,
+    Object? email = freezed,
     Object? settings = freezed,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-    Object? personalWalletBalance = null,
-    Object? companyWalletBalance = null,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? personalWalletBalance = freezed,
+    Object? companyWalletBalance = freezed,
   }) {
     return _then(_$_UserModel(
       id: null == id
@@ -197,6 +223,10 @@ class __$$_UserModelCopyWithImpl<$Res>
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
+      role: freezed == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String?,
       username: freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -209,30 +239,30 @@ class __$$_UserModelCopyWithImpl<$Res>
           ? _value.profilePic
           : profilePic // ignore: cast_nullable_to_non_nullable
               as String?,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       settings: freezed == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdAt: null == createdAt
+              as SettingModel?,
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      updatedAt: null == updatedAt
+              as String?,
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      personalWalletBalance: null == personalWalletBalance
+              as String?,
+      personalWalletBalance: freezed == personalWalletBalance
           ? _value.personalWalletBalance
           : personalWalletBalance // ignore: cast_nullable_to_non_nullable
-              as int,
-      companyWalletBalance: null == companyWalletBalance
+              as int?,
+      companyWalletBalance: freezed == companyWalletBalance
           ? _value.companyWalletBalance
           : companyWalletBalance // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -242,17 +272,18 @@ class __$$_UserModelCopyWithImpl<$Res>
 class _$_UserModel implements _UserModel {
   _$_UserModel(
       {required this.id,
-      required this.firstName,
-      required this.lastName,
-      required this.username,
-      required this.phoneNumber,
+      this.firstName,
+      this.lastName,
+      this.role,
+      this.username,
+      this.phoneNumber,
       this.profilePic,
-      required this.email,
-      required this.settings,
-      required this.createdAt,
-      required this.updatedAt,
-      required this.personalWalletBalance,
-      required this.companyWalletBalance});
+      this.email,
+      this.settings,
+      this.createdAt,
+      this.updatedAt,
+      this.personalWalletBalance,
+      this.companyWalletBalance});
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
@@ -264,27 +295,29 @@ class _$_UserModel implements _UserModel {
   @override
   final String? lastName;
   @override
+  final String? role;
+  @override
   final String? username;
   @override
   final String? phoneNumber;
   @override
   final String? profilePic;
   @override
-  final String email;
+  final String? email;
   @override
-  final String? settings;
+  final SettingModel? settings;
   @override
-  final String createdAt;
+  final String? createdAt;
   @override
-  final String updatedAt;
+  final String? updatedAt;
   @override
-  final int personalWalletBalance;
+  final int? personalWalletBalance;
   @override
-  final int companyWalletBalance;
+  final int? companyWalletBalance;
 
   @override
   String toString() {
-    return 'UserModel(id: $id, firstName: $firstName, lastName: $lastName, username: $username, phoneNumber: $phoneNumber, profilePic: $profilePic, email: $email, settings: $settings, createdAt: $createdAt, updatedAt: $updatedAt, personalWalletBalance: $personalWalletBalance, companyWalletBalance: $companyWalletBalance)';
+    return 'UserModel(id: $id, firstName: $firstName, lastName: $lastName, role: $role, username: $username, phoneNumber: $phoneNumber, profilePic: $profilePic, email: $email, settings: $settings, createdAt: $createdAt, updatedAt: $updatedAt, personalWalletBalance: $personalWalletBalance, companyWalletBalance: $companyWalletBalance)';
   }
 
   @override
@@ -297,6 +330,7 @@ class _$_UserModel implements _UserModel {
                 other.firstName == firstName) &&
             (identical(other.lastName, lastName) ||
                 other.lastName == lastName) &&
+            (identical(other.role, role) || other.role == role) &&
             (identical(other.username, username) ||
                 other.username == username) &&
             (identical(other.phoneNumber, phoneNumber) ||
@@ -323,6 +357,7 @@ class _$_UserModel implements _UserModel {
       id,
       firstName,
       lastName,
+      role,
       username,
       phoneNumber,
       profilePic,
@@ -350,17 +385,18 @@ class _$_UserModel implements _UserModel {
 abstract class _UserModel implements UserModel {
   factory _UserModel(
       {required final int id,
-      required final String? firstName,
-      required final String? lastName,
-      required final String? username,
-      required final String? phoneNumber,
+      final String? firstName,
+      final String? lastName,
+      final String? role,
+      final String? username,
+      final String? phoneNumber,
       final String? profilePic,
-      required final String email,
-      required final String? settings,
-      required final String createdAt,
-      required final String updatedAt,
-      required final int personalWalletBalance,
-      required final int companyWalletBalance}) = _$_UserModel;
+      final String? email,
+      final SettingModel? settings,
+      final String? createdAt,
+      final String? updatedAt,
+      final int? personalWalletBalance,
+      final int? companyWalletBalance}) = _$_UserModel;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$_UserModel.fromJson;
@@ -372,25 +408,164 @@ abstract class _UserModel implements UserModel {
   @override
   String? get lastName;
   @override
+  String? get role;
+  @override
   String? get username;
   @override
   String? get phoneNumber;
   @override
   String? get profilePic;
   @override
-  String get email;
+  String? get email;
   @override
-  String? get settings;
+  SettingModel? get settings;
   @override
-  String get createdAt;
+  String? get createdAt;
   @override
-  String get updatedAt;
+  String? get updatedAt;
   @override
-  int get personalWalletBalance;
+  int? get personalWalletBalance;
   @override
-  int get companyWalletBalance;
+  int? get companyWalletBalance;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+SettingModel _$SettingModelFromJson(Map<String, dynamic> json) {
+  return _SettingModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$SettingModel {
+  String get password => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $SettingModelCopyWith<SettingModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SettingModelCopyWith<$Res> {
+  factory $SettingModelCopyWith(
+          SettingModel value, $Res Function(SettingModel) then) =
+      _$SettingModelCopyWithImpl<$Res, SettingModel>;
+  @useResult
+  $Res call({String password});
+}
+
+/// @nodoc
+class _$SettingModelCopyWithImpl<$Res, $Val extends SettingModel>
+    implements $SettingModelCopyWith<$Res> {
+  _$SettingModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? password = null,
+  }) {
+    return _then(_value.copyWith(
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_SettingModelCopyWith<$Res>
+    implements $SettingModelCopyWith<$Res> {
+  factory _$$_SettingModelCopyWith(
+          _$_SettingModel value, $Res Function(_$_SettingModel) then) =
+      __$$_SettingModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String password});
+}
+
+/// @nodoc
+class __$$_SettingModelCopyWithImpl<$Res>
+    extends _$SettingModelCopyWithImpl<$Res, _$_SettingModel>
+    implements _$$_SettingModelCopyWith<$Res> {
+  __$$_SettingModelCopyWithImpl(
+      _$_SettingModel _value, $Res Function(_$_SettingModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? password = null,
+  }) {
+    return _then(_$_SettingModel(
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_SettingModel implements _SettingModel {
+  _$_SettingModel({required this.password});
+
+  factory _$_SettingModel.fromJson(Map<String, dynamic> json) =>
+      _$$_SettingModelFromJson(json);
+
+  @override
+  final String password;
+
+  @override
+  String toString() {
+    return 'SettingModel(password: $password)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SettingModel &&
+            (identical(other.password, password) ||
+                other.password == password));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, password);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SettingModelCopyWith<_$_SettingModel> get copyWith =>
+      __$$_SettingModelCopyWithImpl<_$_SettingModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_SettingModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _SettingModel implements SettingModel {
+  factory _SettingModel({required final String password}) = _$_SettingModel;
+
+  factory _SettingModel.fromJson(Map<String, dynamic> json) =
+      _$_SettingModel.fromJson;
+
+  @override
+  String get password;
+  @override
+  @JsonKey(ignore: true)
+  _$$_SettingModelCopyWith<_$_SettingModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

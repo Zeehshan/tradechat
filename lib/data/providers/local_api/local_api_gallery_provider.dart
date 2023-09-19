@@ -1,3 +1,5 @@
+import 'package:file_picker/file_picker.dart';
+import 'package:file_picker/src/file_picker_result.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -49,6 +51,31 @@ class LocalApiGalleryProvider implements LocalApiProvider {
         return null;
       } else {
         return pickedFile.path;
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<String?> getFile() async {
+    try {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+          allowMultiple: false,
+          type: FileType.custom,
+          allowedExtensions: [
+            'jpg',
+            'jpeg',
+            'pdf',
+            'doc',
+            'png',
+            'excel',
+            'mp4'
+          ]);
+      if (result == null) {
+        return null;
+      } else {
+        return result.files.first.path;
       }
     } catch (e) {
       rethrow;

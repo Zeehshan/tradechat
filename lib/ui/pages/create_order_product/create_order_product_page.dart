@@ -11,6 +11,7 @@ class CreareOrderProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWidget(
+        backgroundColor: const Color(0xffededed),
         backButtonCallback: () => Navigator.pop(context),
         centerTitle: true,
         title: Text(

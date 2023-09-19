@@ -12,8 +12,7 @@ class InvoicesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       body: GetX<MyInvoicesController>(
           init: MyInvoicesController(),
           initState: (state) {},
@@ -46,6 +45,6 @@ class InvoicesPage extends StatelessWidget {
               ],
             );
           }),
-    ));
+    );
   }
 }

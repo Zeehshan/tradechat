@@ -26,4 +26,16 @@ abstract class AppRoutes {
   static const addUpdateMyProduct = '/addUpdateMyProduct';
 
   static const editProfile = '/editProfile';
+
+  static const chatPage = '/chatPage';
+
+  static const videoPage = '/videoPage';
+
+  static const payments = '/payments';
+  static const wallet = '/wallet';
+  static const bankPayments = '/bankPayments';
+  static const newPayment = '/newPayment';
+
+  static const paymentDetails = '/paymentDetails';
+  static const settings = '/settings';
 }

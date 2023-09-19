@@ -7,3 +7,6 @@ export 'order/order_model.dart';
 export 'invoice/invoice_model.dart';
 export 'get_state_manage_ui/get_state_manage_ui_model.dart';
 export 'company/company_model.dart';
+export 'chat/chat_model.dart';
+export 'message/message_model.dart';
+export 'payment/payment_model.dart';

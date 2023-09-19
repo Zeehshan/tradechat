@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'application.dart';
 import 'data/providers/providers.dart';
 
+// https://1668.bubbleapps.io/version-test/customer-mobile?view=message
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initServices();

@@ -19,6 +19,7 @@ class InvoiceDetailsPage extends GetView<MyInvoicesController> {
         '${DateFormat.yMMMd().format(messageData)} ${DateFormat.jm().format(messageData)}';
     return Scaffold(
       appBar: AppBarWidget(
+        backgroundColor: const Color(0xffededed),
         backButtonCallback: () => Navigator.pop(context),
         title: Text.rich(TextSpan(
             text: 'Invoice #:',

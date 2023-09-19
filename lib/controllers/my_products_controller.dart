@@ -128,6 +128,7 @@ class MyProductsController extends GetxController {
     //       .toList();
     //   logger.d(products.length);
     // }
+    searchQuery.value = query;
   }
 
   removeOverlay() {

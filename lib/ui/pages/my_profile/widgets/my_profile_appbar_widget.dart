@@ -13,7 +13,7 @@ class MyProfileAppbarWidget extends StatelessWidget {
       floating: false,
       pinned: true,
       automaticallyImplyLeading: false,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: const Color(0xffededed),
       elevation: 3,
       title: Text(
         'My Profile',

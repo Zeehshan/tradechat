@@ -34,6 +34,29 @@ class OrderWidget extends StatelessWidget {
                   offset: const Offset(0, 0))
             ]),
         child: TextButton(
+          onLongPress: () {
+            final RenderBox renderBox =
+                Overlay.of(context).context.findRenderObject()! as RenderBox;
+            Offset offset = renderBox.localToGlobal(const Offset(1, 50));
+            SubMenue.showPopupMenu(
+                context: context,
+                offset: offset,
+                onDelete: () {
+                  dialogs.WarningAlertDialog.warningAlertDialog(
+                          context: context,
+                          message:
+                              'Are you sure you want to delete this order.?')
+                      .then((v) {
+                    if (v == true) {
+                      controller.deleteOrder(order.id);
+                    }
+                  });
+                },
+                onEdit: () {
+                  controller.updateOrderCalled(order);
+                  Get.toNamed(AppRoutes.addNewOrder);
+                });
+          },
           onPressed: () => controller.selectedOrder(order),
           style: TextButton.styleFrom(
             shape:
@@ -91,27 +114,27 @@ class OrderWidget extends StatelessWidget {
                           'Total products: ${order.orderProducts.length}',
                           style: Theme.of(context).textTheme.labelMedium,
                         ),
-                        const Spacer(),
-                        DropDownWidget(
-                          onDelete: () {
-                            Future.value().then((value) =>
-                                dialogs.WarningAlertDialog.warningAlertDialog(
-                                        context: context,
-                                        message:
-                                            'Are you sure you want to delete this order.?')
-                                    .then((v) {
-                                  if (v == true) {
-                                    controller.deleteOrder(order.id);
-                                  }
-                                }));
-                          },
-                          onEdit: () {
-                            Future.value().then((_) {
-                              controller.updateOrderCalled(order);
-                              Get.toNamed(AppRoutes.addNewOrder);
-                            });
-                          },
-                        ),
+                        // const Spacer(),
+                        // DropDownWidget(
+                        //   onDelete: () {
+                        //     Future.value().then((value) =>
+                        //         dialogs.WarningAlertDialog.warningAlertDialog(
+                        //                 context: context,
+                        //                 message:
+                        //                     'Are you sure you want to delete this order.?')
+                        //             .then((v) {
+                        //           if (v == true) {
+                        //             controller.deleteOrder(order.id);
+                        //           }
+                        //         }));
+                        //   },
+                        //   onEdit: () {
+                        //     Future.value().then((_) {
+                        //       controller.updateOrderCalled(order);
+                        //       Get.toNamed(AppRoutes.addNewOrder);
+                        //     });
+                        //   },
+                        // ),
                       ],
                     ),
                     const SizedBox(

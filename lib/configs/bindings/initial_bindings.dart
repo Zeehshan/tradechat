@@ -15,6 +15,12 @@ class InitialBinding extends Bindings {
     Get.put<AppApiRepostory>(
       AppApiRepostory(),
     );
+    Get.put<SocketController>(
+      SocketController(),
+      permanent: true,
+    );
+    Get.put<ChatsController>(ChatsController(), permanent: true);
+
     Get.put<MyOrdersController>(MyOrdersController(), permanent: true);
     Get.put<MyProductsController>(MyProductsController(), permanent: true);
     Get.put<AuthenticationController>(

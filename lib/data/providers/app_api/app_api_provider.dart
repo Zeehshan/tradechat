@@ -32,7 +32,12 @@ abstract class AppApiProvider {
   Future orderProductsUpdate(
       {required int id, required List<Map<String, int>> products});
 
-  Future<String?> uploadFile({required String localImg});
+  Future orderDocumentsUpdate(
+      {required int id, required Map<String, dynamic> documents});
+
+  Future<String?> uploadFile(
+      {required String localImg,
+      Function(String file, double progress)? onReceiveProgress});
 
   Future deleteFile({required String name});
 
@@ -48,4 +53,28 @@ abstract class AppApiProvider {
 
   Future updateInvoice(
       {required int id, required Map<String, dynamic> invoice});
+
+  Future<int> createChat({required int id});
+
+  Future addNewPayment(
+      {required int amount,
+      required String senderName,
+      required int orderNumber,
+      required int accountNumber,
+      required String accountType,
+      required String image});
+
+  Future updatePayment({
+    required int id,
+    required int amount,
+    required String senderName,
+    required int orderNumber,
+    required int accountNumber,
+    required String accountType,
+  });
+  Future deletePayment({required int id});
+
+  Future deleteChat({required int id});
+
+  Future<PaymentModel> confirmAmount({required int amount, required int id});
 }

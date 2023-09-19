@@ -11,16 +11,16 @@ class BodyWidghet extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         const ChatsAppbarWidget(),
-        SliverToBoxAdapter(
-          child: Container(
-            height: 10,
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            width: MediaQuery.of(context).size.width,
-            child: CustomPaint(
-              painter: DashedLinePainter(),
-            ),
-          ),
-        ),
+        // SliverToBoxAdapter(
+        //   child: Container(
+        //     height: 10,
+        //     margin: const EdgeInsets.symmetric(horizontal: 20),
+        //     width: MediaQuery.of(context).size.width,
+        //     child: CustomPaint(
+        //       painter: DashedLinePainter(),
+        //     ),
+        //   ),
+        // ),
         const SliverToBoxAdapter(
           child: ChatsWidget(),
         )

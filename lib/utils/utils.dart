@@ -5,3 +5,5 @@ export 'storages/storages.dart';
 export 'enums.dart';
 export 'alerts.dart';
 export 'tools.dart';
+export 'file_icon.dart';
+export 'sub_menu.dart';

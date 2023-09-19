@@ -15,6 +15,7 @@ class EditProfileController extends GetxController {
   final authenticationController = Get.find<AuthenticationController>();
   final LocalRepository localRepository = Get.find<LocalRepository>();
   RxBool isFormValidated = false.obs;
+  RxBool isFormCompanyValidated = false.obs;
   TextInput fname = const TextInput.dirty();
   TextInput lname = const TextInput.pure();
   TextInput username = const TextInput.pure();
@@ -101,42 +102,42 @@ class EditProfileController extends GetxController {
 
   cNameChaged(String v) {
     cName = TextInput.dirty(v);
-    _validationForm();
+    _validationConpanyForm();
   }
 
   cMFnameChaged(String v) {
     cMFname = TextInput.dirty(v);
-    _validationForm();
+    _validationConpanyForm();
   }
 
   cMLnameChaged(String v) {
     cMLname = TextInput.dirty(v);
-    _validationForm();
+    _validationConpanyForm();
   }
 
   cPhioneNumberChaged(String v) {
     cPhone = TextInput.dirty(v);
-    _validationForm();
+    _validationConpanyForm();
   }
 
   cAddressChaged(String v) {
     cAddress = TextInput.dirty(v);
-    _validationForm();
+    _validationConpanyForm();
   }
 
   cCountryChaged(String v) {
     cCountry = TextInput.dirty(v);
-    _validationForm();
+    _validationConpanyForm();
   }
 
   cCityChaged(String v) {
     cCiity = TextInput.dirty(v);
-    _validationForm();
+    _validationConpanyForm();
   }
 
   cZipChaged(String v) {
     cZip = TextInput.dirty(v);
-    _validationForm();
+    _validationConpanyForm();
   }
 
   dAdressChaged(String v) {
@@ -165,6 +166,32 @@ class EditProfileController extends GetxController {
       if (profilePic.value.isNotEmpty) {
         image = await apiRepostory.uploadFile(localImg: profilePic.value);
       }
+
+      await Future.wait([
+        userRepository.updateProfile(
+            firstanme: fname.value,
+            lastname: lname.value,
+            phone: phoneNumber.value,
+            username: username.value,
+            profilePic: image),
+      ]);
+      manageUI.value = manageUI.value.copyWith(
+          uiAction: const GetStateUIActionModel(
+              message: 'Profile updated successfully',
+              type: GetStateUIActionType.completed));
+    } catch (e) {
+      logger.e(runtimeType, '${e.runtimeType}::${e.toString()}');
+      manageUI.value = manageUI.value.copyWith(
+          uiAction: GetStateUIActionModel(
+              message: e.toString(), type: GetStateUIActionType.failure));
+    }
+  }
+
+  updateCompany() async {
+    try {
+      manageUI.value = manageUI.value.copyWith(
+          uiAction: const GetStateUIActionModel(
+              type: GetStateUIActionType.inProgress));
       final company = CompanyModel(
         companyName: cName.value,
         managerFirstName: cMFname.value,
@@ -177,20 +204,12 @@ class EditProfileController extends GetxController {
         deliveryAddress: dAddress.value,
         deliveryCountry: dCountry.value,
         deliveryCity: dCity.value,
-        deliveryZip: int.parse(dZip.value),
+        deliveryZip: int.tryParse(dZip.value),
       );
-      await Future.wait([
-        userRepository.updateProfile(
-            firstanme: fname.value,
-            lastname: lname.value,
-            phone: phoneNumber.value,
-            username: username.value,
-            profilePic: image),
-        userRepository.updateCompany(company: company)
-      ]);
+      await userRepository.updateCompany(company: company);
       manageUI.value = manageUI.value.copyWith(
           uiAction: const GetStateUIActionModel(
-              message: 'Profile updated successfully',
+              message: 'Company updated successfully',
               type: GetStateUIActionType.completed));
     } catch (e) {
       logger.e(runtimeType, '${e.runtimeType}::${e.toString()}');
@@ -206,6 +225,13 @@ class EditProfileController extends GetxController {
       lname,
       username,
       phoneNumber,
+    ];
+
+    isFormValidated.value = Formz.validate(validInputs);
+  }
+
+  _validationConpanyForm() {
+    final validInputs = <FormzInput>[
       cName,
       cMFname,
       cMLname,
@@ -216,6 +242,6 @@ class EditProfileController extends GetxController {
       cZip
     ];
 
-    isFormValidated.value = Formz.validate(validInputs);
+    isFormCompanyValidated.value = Formz.validate(validInputs);
   }
 }

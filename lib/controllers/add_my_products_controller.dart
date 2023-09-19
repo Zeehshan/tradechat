@@ -34,8 +34,8 @@ class AddMyProductsController extends GetxController {
           break;
         case GetStateUIActionType.completed:
           Get.back();
-          // Alerts.snackBarSuccess(
-          //     title: '', message: value.uiAction.message.toString());
+          Alerts.snackBarSuccess(
+              title: '', message: value.uiAction.message.toString());
           break;
         case GetStateUIActionType.navigateToBack:
           break;

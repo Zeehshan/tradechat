@@ -3,3 +3,8 @@ export 'add_invoice_dialog.dart';
 export 'loader_dialog.dart';
 export 'warning_alert_dialog.dart';
 export 'image_picker_dialog.dart';
+export 'input_payment_dialog.dart';
+export 'paying_alert_dialog.dart';
+export 'file_dialog.dart';
+export 'full_screen_dialog.dart';
+export 'add_to_order_dialog.dart';

@@ -3,8 +3,10 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../controllers/controllers.dart';
-import '../../../../utils/tools.dart';
+import '../../../../utils/utils.dart';
+import '../../../dialogs/dialogs.dart';
 import '../../../widgets/widgets.dart';
+import 'package:path/path.dart' as path;
 
 class ProductListWidget extends StatelessWidget {
   const ProductListWidget({super.key});
@@ -142,7 +144,52 @@ class ProductListWidget extends StatelessWidget {
                 );
               }),
             ),
-          )
+          ),
+          if (controller.slectedOrder?.documents != {} &&
+              controller.slectedOrder?.documents['files'] != null)
+            Column(
+              children: List.generate(
+                  controller.slectedOrder?.documents['files'].length, (index) {
+                final file =
+                    controller.slectedOrder?.documents['files'][index]['file'];
+                return Container(
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () {
+                        FileDialog.fileDialog(context: context, fileurl: file);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            fileIcon(path.extension(file)),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Expanded(
+                                child: Text(
+                              path.basename(file),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .copyWith(color: Colors.black, fontSize: 14),
+                            ))
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              }),
+            )
         ],
       );
     });

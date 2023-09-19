@@ -31,7 +31,9 @@ class SignupController extends GetxController {
       isSingupPressed.value = true;
       await _userRepository.signup(
           email: email.value, password: password.value);
+      await _authenticationController.refreshedUser();
       isSingupPressed.value = false;
+
       _authenticationController.handleAuthenticationChanged(true);
     } catch (e) {
       isSingupPressed.value = false;

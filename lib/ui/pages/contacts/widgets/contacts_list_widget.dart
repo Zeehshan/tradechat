@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tradechat/ui/pages/contacts/widgets/widgets.dart';
+import 'package:get/get.dart';
 
-class ContactsListWidget extends StatelessWidget {
+import '../../../../controllers/controllers.dart';
+import 'widgets.dart';
+
+class ContactsListWidget extends GetView<UsersController> {
   const ContactsListWidget({super.key});
 
   @override
@@ -10,9 +13,11 @@ class ContactsListWidget extends StatelessWidget {
       shrinkWrap: true,
       padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: 40,
+      itemCount: controller.state?.length ?? 0,
       itemBuilder: (context, index) {
-        return const ContactWidget();
+        return ContactWidget(
+          user: controller.state![index],
+        );
       },
     );
   }

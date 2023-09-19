@@ -1,14 +1,12 @@
 // ignore_for_file: prefer_contains, depend_on_referenced_packages
 
-import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../configs/apis/apis.dart';
 import '../../configs/routes/assets_path.dart';
-import '../../utils/utils.dart';
+import '../dialogs/dialogs.dart';
 import 'widgets.dart';
 
 class NetworkImageWidget extends StatelessWidget {
@@ -57,25 +55,25 @@ class NetworkImageWidget extends StatelessWidget {
                 height: height,
                 alignment: Alignment.center,
                 fit: boxFit ?? BoxFit.cover,
-                imageBuilder: (context, imageProvider) => Container(
-                  width: width,
-                  height: height,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: imageProvider,
-                      fit: boxFit ?? BoxFit.cover,
-                    ),
-                  ),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 1.5, sigmaY: 1.5),
-                    child: userId == null
-                        ? null
-                        : Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.0)),
-                          ),
-                  ),
-                ),
+                // imageBuilder: (context, imageProvider) => Container(
+                //   width: width,
+                //   height: height,
+                //   decoration: BoxDecoration(
+                //     image: DecorationImage(
+                //       image: imageProvider,
+                //       fit: boxFit ?? BoxFit.cover,
+                //     ),
+                //   ),
+                //   child: BackdropFilter(
+                //     filter: ImageFilter.blur(sigmaX: 1.5, sigmaY: 1.5),
+                //     child: userId == null
+                //         ? null
+                //         : Container(
+                //             decoration: BoxDecoration(
+                //                 color: Colors.white.withOpacity(0.0)),
+                //           ),
+                //   ),
+                // ),
                 placeholder: (context, url) => userId != null
                     ? Container(
                         width: width,

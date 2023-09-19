@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../../../models/models.dart';
+import '../../../../utils/utils.dart';
 import '../../../dialogs/dialogs.dart';
 import '../../../widgets/widgets.dart';
 
 class ContactWidget extends StatelessWidget {
-  const ContactWidget({super.key});
+  final UserModel user;
+  const ContactWidget({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +16,8 @@ class ContactWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 10),
       child: TextButton(
         onPressed: () {
-          CreateChatDialog.createChatDialog(
-              context: context, username: 'Zeeshan Ali');
+          logger.d(user.toJson());
+          CreateChatDialog.createChatDialog(user: user, context: context);
         },
         style: TextButton.styleFrom(
           shape:
@@ -42,7 +45,8 @@ class ContactWidget extends StatelessWidget {
                 width: 60,
                 height: 60,
                 borderRadius: 100,
-                imageUrl: null,
+                imageUrl: user.profilePic,
+                userId: user.id.toString(),
                 onPressed: () {},
               ),
             ),
@@ -55,7 +59,7 @@ class ContactWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Zeeshan Ali',
+                    '${user.firstName} ${user.lastName}',
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: Theme.of(context)
@@ -67,7 +71,7 @@ class ContactWidget extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    'Flutter developer',
+                    '${user.username}',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.displaySmall,

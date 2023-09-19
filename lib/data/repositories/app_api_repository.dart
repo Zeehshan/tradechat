@@ -73,9 +73,12 @@ class AppApiRepostory {
     }
   }
 
-  Future<String?> uploadFile({required String localImg}) async {
+  Future<String?> uploadFile(
+      {required String localImg,
+      Function(String file, double progress)? onReceiveProgress}) async {
     try {
-      return await apiProvider.uploadFile(localImg: localImg);
+      return await apiProvider.uploadFile(
+          localImg: localImg, onReceiveProgress: onReceiveProgress);
     } catch (e) {
       rethrow;
     }
@@ -152,6 +155,89 @@ class AppApiRepostory {
       {required int id, required Map<String, dynamic> invoice}) async {
     try {
       return await apiProvider.updateInvoice(id: id, invoice: invoice);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<int> createChat({required int id}) async {
+    try {
+      return await apiProvider.createChat(id: id);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future orderDocumentsUpdate(
+      {required int id, required Map<String, dynamic> documents}) async {
+    try {
+      return await apiProvider.orderDocumentsUpdate(
+          id: id, documents: documents);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future addNewPayment(
+      {required int amount,
+      required String senderName,
+      required int orderNumber,
+      required int accountNumber,
+      required String accountType,
+      required String image}) async {
+    try {
+      return await apiProvider.addNewPayment(
+          amount: amount,
+          senderName: senderName,
+          orderNumber: orderNumber,
+          accountNumber: accountNumber,
+          accountType: accountType,
+          image: image);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future updatePayment({
+    required int id,
+    required int amount,
+    required String senderName,
+    required int orderNumber,
+    required int accountNumber,
+    required String accountType,
+  }) async {
+    try {
+      return await apiProvider.updatePayment(
+          id: id,
+          amount: amount,
+          senderName: senderName,
+          orderNumber: orderNumber,
+          accountNumber: accountNumber,
+          accountType: accountType);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future deletePayment({required int id}) async {
+    try {
+      return await apiProvider.deletePayment(id: id);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future confirmAmount({required int amount, required int id}) async {
+    try {
+      return await apiProvider.confirmAmount(amount: amount, id: id);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future deleteChat({required int id}) async {
+    try {
+      return await apiProvider.deleteChat(id: id);
     } catch (e) {
       rethrow;
     }

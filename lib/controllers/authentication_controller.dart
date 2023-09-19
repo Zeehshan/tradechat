@@ -15,6 +15,8 @@ class AuthenticationController extends GetxController {
 
   ///
   final myOrderController = Get.find<MyOrdersController>();
+  final chatController = Get.find<ChatsController>();
+  final socketController = Get.find<SocketController>();
 
   ///
   @override
@@ -33,7 +35,10 @@ class AuthenticationController extends GetxController {
     if (isUserAuthenticated == false) {
       Get.offAllNamed(AppRoutes.login);
     } else {
+      socketController.connectSocket();
+      chatController.loadChats();
       myOrderController.myorders();
+
       Get.offAllNamed(AppRoutes.scaffolNavbar);
       refreshCompany();
     }
@@ -50,7 +55,6 @@ class AuthenticationController extends GetxController {
 
   Future<bool> getAuthenticatedStatus() async {
     try {
-      await Future.delayed(const Duration(seconds: 2));
       final user = await secureStorage.getLoggedInUser();
       if (user != null) {
         final _user = await _userRepository.profile();
@@ -82,6 +86,15 @@ class AuthenticationController extends GetxController {
     try {
       final _company = await _userRepository.getCompany();
       company.value = _company;
+    } catch (e) {
+      logger.e(e);
+    }
+  }
+
+  updatePassword(String password) async {
+    try {
+      await _userRepository.updatePaymentPassowrd(password: password);
+      refreshedUser();
     } catch (e) {
       logger.e(e);
     }

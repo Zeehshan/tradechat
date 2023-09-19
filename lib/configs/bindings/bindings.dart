@@ -9,3 +9,8 @@ export 'login_binding.dart';
 export 'signup_binding.dart';
 export 'add_my_products_binding.dart';
 export 'edit_profile_binding.dart';
+export 'users_binding.dart';
+export 'socket_binding.dart';
+export 'chat_binding.dart';
+export 'new_payment_binding.dart';
+export 'payments_binding.dart';

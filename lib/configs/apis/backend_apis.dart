@@ -1,5 +1,6 @@
 class BackendApis {
   static String baseUrl = 'http://54.169.73.169:3000/api';
+  static String socketBaseUrl = 'http://54.169.73.169:3000';
   //// user
   static String login = '/auth/login';
   static String signUp = '/auth/signup';
@@ -22,4 +23,18 @@ class BackendApis {
   static const displayFile = '/file/download?filename=';
 
   static const company = '/company';
+
+  static const users = '/auth/users';
+
+  static const chat = '/chat/';
+
+  static const messages = '/chat/{chatId}/messages';
+
+  static const chatRequest = '/chat/request';
+
+  static const newPayment = '/payment';
+
+  static const confirmPayment = '/payment/{paymentId}/confirm';
+
+  static const deleteChat = '/chat/{chatId}/delete';
 }

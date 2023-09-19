@@ -8,7 +8,7 @@ class AddMultiProductAppBarWidget extends StatelessWidget {
     return SliverAppBar(
       floating: false,
       pinned: true,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: const Color(0xffededed),
       iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
       elevation: 3,
       title: Text(

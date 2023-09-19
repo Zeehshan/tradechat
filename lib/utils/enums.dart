@@ -25,3 +25,5 @@ enum AlertBannerLocation {
 }
 
 enum PostsType { promoted, post }
+
+enum MessageOptions { reply, edit, delete }

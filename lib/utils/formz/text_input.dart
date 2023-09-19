@@ -10,7 +10,7 @@ class TextInput extends FormzInput<String, FirstTextInputValidationError> {
   FirstTextInputValidationError? validator(String value) {
     return value.isEmpty
         ? FirstTextInputValidationError.empty
-        : value.length < 2
+        : value.isEmpty
             ? FirstTextInputValidationError.shortLenght
             : null;
   }

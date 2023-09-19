@@ -18,6 +18,7 @@ class MyOrdersController extends GetxController {
 
   String selectedOrderTotalPrice = '';
 
+  RxInt orderId = (-1).obs;
 
   @override
   void onInit() async {
@@ -78,6 +79,13 @@ class MyOrdersController extends GetxController {
     _totalPrice();
   }
 
+  updateDocuments(int id) {
+    int index = orders.map((element) => element.id).toList().indexOf(id);
+    final order = orders[index];
+
+    // apiRepostory.orderDocumentsUpdate(id: id, documents: documents);
+  }
+
   deleteOrder(int id) async {
     try {
       manageUI.value = manageUI.value.copyWith(
@@ -132,4 +140,20 @@ class MyOrdersController extends GetxController {
     }
   }
 
+  addToOrder(MessageModel msg) async {
+    final OrderModel order =
+        orders.firstWhere((element) => element.id == orderId.value);
+    List<dynamic> documents = [];
+    if (order.documents['files'] != null) {
+      documents = order.documents['files'].map((e) => e).toList();
+    }
+    documents.add({'file': msg.fileUrl.toString()});
+
+    apiRepostory.orderDocumentsUpdate(
+        id: orderId.value, documents: {'files': documents});
+  }
+
+  selectOrder(int order) {
+    orderId.value = order;
+  }
 }

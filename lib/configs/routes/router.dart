@@ -5,9 +5,9 @@ import '../../ui/pages/pages.dart';
 import '../bindings/bindings.dart';
 import 'app_routes.dart';
 
-final _navigatorKey = GlobalKey<NavigatorState>();
+final navigatorKey = GlobalKey<NavigatorState>();
 
-NavigatorState get navigator => _navigatorKey.currentState!;
+NavigatorState get navigator => navigatorKey.currentState!;
 
 final routes = [
   GetPage(name: AppRoutes.splash, page: () => const SplashPage()),
@@ -31,6 +31,7 @@ final routes = [
       binding: AddnewOrderBinding()),
   GetPage(
     name: AppRoutes.contacts,
+    binding: UsersBinding(),
     page: () => const ContacsPage(),
   ),
   GetPage(
@@ -69,4 +70,42 @@ final routes = [
       name: AppRoutes.editProfile,
       page: () => const EditProfilePage(),
       binding: EditProfileBinding()),
+
+  GetPage(
+      name: AppRoutes.chatPage,
+      page: () => const ChatPage(),
+      binding: ChatBinding()),
+  GetPage(
+    name: AppRoutes.videoPage,
+    page: () => const VideoPage(),
+  ),
+
+  GetPage(
+    name: AppRoutes.payments,
+    page: () => const PaymentsPage(),
+  ),
+
+  GetPage(
+    name: AppRoutes.wallet,
+    page: () => const WalletPage(),
+  ),
+
+  GetPage(
+    name: AppRoutes.bankPayments,
+    binding: PaymentsBinding(),
+    page: () => const BankPaymentsPage(),
+  ),
+
+  GetPage(
+      name: AppRoutes.newPayment,
+      page: () => const NewPaymentPage(),
+      binding: NewPaymentBinding()),
+  GetPage(
+    name: AppRoutes.paymentDetails,
+    page: () => const PaymentDetailsPage(),
+  ),
+  GetPage(
+    name: AppRoutes.settings,
+    page: () => const SettingsPage(),
+  ),
 ];
